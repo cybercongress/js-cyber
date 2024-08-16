@@ -481,7 +481,11 @@ export class SigningCyberClient extends CyberClient {
       }),
     };
 
-    return this.signAndBroadcast(senderAddress, [storeCodeMsg], fee, memo);
+    // When uploading a contract, the simulation is only 1-2% away from the actual gas usage.
+    // So we have a smaller default gas multiplier than signAndBroadcast.
+    const usedFee = fee == "auto" ? 1.1 : fee;
+
+    return this.signAndBroadcast(senderAddress, [storeCodeMsg], usedFee, memo);
   }
 
   public async instantiate(
@@ -962,7 +966,9 @@ export class SigningCyberClient extends CyberClient {
     let usedFee: StdFee;
     if (fee == "auto" || typeof fee === "number") {
       const gasEstimation = await this.simulate(signerAddress, messages, memo);
-      const multiplier = typeof fee === "number" ? fee : 1.3;
+      // Starting with Cosmos SDK 0.47, we see many cases in which 1.3 is not enough anymore
+      // E.g. https://github.com/cosmos/cosmos-sdk/issues/16020
+      const multiplier = typeof fee === "number" ? fee : 1.4;
       usedFee = {
         amount: [],
         gas: Math.round(gasEstimation * multiplier).toString(),
