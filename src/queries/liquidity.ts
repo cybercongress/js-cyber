@@ -32,7 +32,7 @@ export function setupLiquidityExtension(base: QueryClient): LiquidityExtension {
       },
       pool: async (id: number) => {
         const response = await queryService.LiquidityPool({
-          poolId: id,
+          poolId: Long.fromNumber(id),
         });
         return response;
       },

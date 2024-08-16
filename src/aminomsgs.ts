@@ -346,7 +346,7 @@ export function createCyberAminoConverters(): AminoConverters {
       }: AminoMsgSwapWithinBatch["value"]): MsgSwapWithinBatch => {
         return {
           swapRequesterAddress: swap_requester_address,
-          poolId: parseInt(pool_id) || 0,
+          poolId: Long.fromNumber(parseInt(pool_id, 10) || 0),
           swapTypeId: swap_type_id,
           offerCoin: offer_coin,
           demandCoinDenom: demand_coin_denom,
@@ -372,7 +372,7 @@ export function createCyberAminoConverters(): AminoConverters {
         deposit_coins,
       }: AminoMsgDepositWithinBatch["value"]): MsgDepositWithinBatch => ({
         depositorAddress: depositor_address,
-        poolId: parseInt(pool_id) || 0,
+        poolId: Long.fromNumber(parseInt(pool_id, 10) || 0),
         depositCoins: [...deposit_coins],
       }),
     },
@@ -393,7 +393,7 @@ export function createCyberAminoConverters(): AminoConverters {
         pool_coin,
       }: AminoMsgWithdrawWithinBatch["value"]): MsgWithdrawWithinBatch => ({
         withdrawerAddress: withdrawer_address,
-        poolId: parseInt(pool_id) || 0,
+        poolId: Long.fromNumber(parseInt(pool_id, 10) || 0),
         poolCoin: pool_coin,
       }),
     },
