@@ -1,13 +1,14 @@
 /* eslint-disable */
-import { Params, Route } from "./types";
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
 import Long from "long";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import _m0 from "protobufjs/minimal";
+import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { Params, Route } from "./types";
 
 export const protobufPackage = "cyber.grid.v1beta1";
 
-export interface QueryParamsRequest {}
+export interface QueryParamsRequest {
+}
 
 export interface QueryParamsResponse {
   params?: Params;
@@ -113,9 +114,7 @@ export const QueryParamsResponse = {
   },
 
   fromJSON(object: any): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-    };
+    return { params: isSet(object.params) ? Params.fromJSON(object.params) : undefined };
   },
 
   toJSON(message: QueryParamsResponse): unknown {
@@ -126,8 +125,9 @@ export const QueryParamsResponse = {
 
   fromPartial<I extends Exact<DeepPartial<QueryParamsResponse>, I>>(object: I): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params =
-      object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    message.params = (object.params !== undefined && object.params !== null)
+      ? Params.fromPartial(object.params)
+      : undefined;
     return message;
   },
 };
@@ -163,9 +163,7 @@ export const QuerySourceRequest = {
   },
 
   fromJSON(object: any): QuerySourceRequest {
-    return {
-      source: isSet(object.source) ? String(object.source) : "",
-    };
+    return { source: isSet(object.source) ? String(object.source) : "" };
   },
 
   toJSON(message: QuerySourceRequest): unknown {
@@ -212,9 +210,7 @@ export const QueryDestinationRequest = {
   },
 
   fromJSON(object: any): QueryDestinationRequest {
-    return {
-      destination: isSet(object.destination) ? String(object.destination) : "",
-    };
+    return { destination: isSet(object.destination) ? String(object.destination) : "" };
   },
 
   toJSON(message: QueryDestinationRequest): unknown {
@@ -261,24 +257,20 @@ export const QueryRoutedEnergyResponse = {
   },
 
   fromJSON(object: any): QueryRoutedEnergyResponse {
-    return {
-      value: Array.isArray(object?.value) ? object.value.map((e: any) => Coin.fromJSON(e)) : [],
-    };
+    return { value: Array.isArray(object?.value) ? object.value.map((e: any) => Coin.fromJSON(e)) : [] };
   },
 
   toJSON(message: QueryRoutedEnergyResponse): unknown {
     const obj: any = {};
     if (message.value) {
-      obj.value = message.value.map((e) => (e ? Coin.toJSON(e) : undefined));
+      obj.value = message.value.map((e) => e ? Coin.toJSON(e) : undefined);
     } else {
       obj.value = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryRoutedEnergyResponse>, I>>(
-    object: I,
-  ): QueryRoutedEnergyResponse {
+  fromPartial<I extends Exact<DeepPartial<QueryRoutedEnergyResponse>, I>>(object: I): QueryRoutedEnergyResponse {
     const message = createBaseQueryRoutedEnergyResponse();
     message.value = object.value?.map((e) => Coin.fromPartial(e)) || [];
     return message;
@@ -374,9 +366,7 @@ export const QueryRouteResponse = {
   },
 
   fromJSON(object: any): QueryRouteResponse {
-    return {
-      route: isSet(object.route) ? Route.fromJSON(object.route) : undefined,
-    };
+    return { route: isSet(object.route) ? Route.fromJSON(object.route) : undefined };
   },
 
   toJSON(message: QueryRouteResponse): unknown {
@@ -387,8 +377,7 @@ export const QueryRouteResponse = {
 
   fromPartial<I extends Exact<DeepPartial<QueryRouteResponse>, I>>(object: I): QueryRouteResponse {
     const message = createBaseQueryRouteResponse();
-    message.route =
-      object.route !== undefined && object.route !== null ? Route.fromPartial(object.route) : undefined;
+    message.route = (object.route !== undefined && object.route !== null) ? Route.fromPartial(object.route) : undefined;
     return message;
   },
 };
@@ -424,9 +413,7 @@ export const QueryRoutesRequest = {
   },
 
   fromJSON(object: any): QueryRoutesRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
-    };
+    return { pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined };
   },
 
   toJSON(message: QueryRoutesRequest): unknown {
@@ -438,10 +425,9 @@ export const QueryRoutesRequest = {
 
   fromPartial<I extends Exact<DeepPartial<QueryRoutesRequest>, I>>(object: I): QueryRoutesRequest {
     const message = createBaseQueryRoutesRequest();
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -492,7 +478,7 @@ export const QueryRoutesResponse = {
   toJSON(message: QueryRoutesResponse): unknown {
     const obj: any = {};
     if (message.routes) {
-      obj.routes = message.routes.map((e) => (e ? Route.toJSON(e) : undefined));
+      obj.routes = message.routes.map((e) => e ? Route.toJSON(e) : undefined);
     } else {
       obj.routes = [];
     }
@@ -504,10 +490,9 @@ export const QueryRoutesResponse = {
   fromPartial<I extends Exact<DeepPartial<QueryRoutesResponse>, I>>(object: I): QueryRoutesResponse {
     const message = createBaseQueryRoutesResponse();
     message.routes = object.routes?.map((e) => Route.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -524,7 +509,9 @@ export interface Query {
 
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "cyber.grid.v1beta1.Query";
     this.rpc = rpc;
     this.Params = this.Params.bind(this);
     this.SourceRoutes = this.SourceRoutes.bind(this);
@@ -536,43 +523,43 @@ export class QueryClientImpl implements Query {
   }
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
-    const promise = this.rpc.request("cyber.grid.v1beta1.Query", "Params", data);
+    const promise = this.rpc.request(this.service, "Params", data);
     return promise.then((data) => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
 
   SourceRoutes(request: QuerySourceRequest): Promise<QueryRoutesResponse> {
     const data = QuerySourceRequest.encode(request).finish();
-    const promise = this.rpc.request("cyber.grid.v1beta1.Query", "SourceRoutes", data);
+    const promise = this.rpc.request(this.service, "SourceRoutes", data);
     return promise.then((data) => QueryRoutesResponse.decode(new _m0.Reader(data)));
   }
 
   DestinationRoutes(request: QueryDestinationRequest): Promise<QueryRoutesResponse> {
     const data = QueryDestinationRequest.encode(request).finish();
-    const promise = this.rpc.request("cyber.grid.v1beta1.Query", "DestinationRoutes", data);
+    const promise = this.rpc.request(this.service, "DestinationRoutes", data);
     return promise.then((data) => QueryRoutesResponse.decode(new _m0.Reader(data)));
   }
 
   DestinationRoutedEnergy(request: QueryDestinationRequest): Promise<QueryRoutedEnergyResponse> {
     const data = QueryDestinationRequest.encode(request).finish();
-    const promise = this.rpc.request("cyber.grid.v1beta1.Query", "DestinationRoutedEnergy", data);
+    const promise = this.rpc.request(this.service, "DestinationRoutedEnergy", data);
     return promise.then((data) => QueryRoutedEnergyResponse.decode(new _m0.Reader(data)));
   }
 
   SourceRoutedEnergy(request: QuerySourceRequest): Promise<QueryRoutedEnergyResponse> {
     const data = QuerySourceRequest.encode(request).finish();
-    const promise = this.rpc.request("cyber.grid.v1beta1.Query", "SourceRoutedEnergy", data);
+    const promise = this.rpc.request(this.service, "SourceRoutedEnergy", data);
     return promise.then((data) => QueryRoutedEnergyResponse.decode(new _m0.Reader(data)));
   }
 
   Route(request: QueryRouteRequest): Promise<QueryRouteResponse> {
     const data = QueryRouteRequest.encode(request).finish();
-    const promise = this.rpc.request("cyber.grid.v1beta1.Query", "Route", data);
+    const promise = this.rpc.request(this.service, "Route", data);
     return promise.then((data) => QueryRouteResponse.decode(new _m0.Reader(data)));
   }
 
   Routes(request: QueryRoutesRequest): Promise<QueryRoutesResponse> {
     const data = QueryRoutesRequest.encode(request).finish();
-    const promise = this.rpc.request("cyber.grid.v1beta1.Query", "Routes", data);
+    const promise = this.rpc.request(this.service, "Routes", data);
     return promise.then((data) => QueryRoutesResponse.decode(new _m0.Reader(data)));
   }
 }
@@ -583,21 +570,14 @@ interface Rpc {
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
+export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {

@@ -1,7 +1,7 @@
 /* eslint-disable */
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { Coin } from "../../../cosmos/base/v1beta1/coin";
 
 export const protobufPackage = "cyber.resources.v1beta1";
 
@@ -100,15 +100,9 @@ export const Params = {
   fromJSON(object: any): Params {
     return {
       maxSlots: isSet(object.maxSlots) ? Number(object.maxSlots) : 0,
-      halvingPeriodVoltBlocks: isSet(object.halvingPeriodVoltBlocks)
-        ? Number(object.halvingPeriodVoltBlocks)
-        : 0,
-      halvingPeriodAmpereBlocks: isSet(object.halvingPeriodAmpereBlocks)
-        ? Number(object.halvingPeriodAmpereBlocks)
-        : 0,
-      baseInvestmintPeriodVolt: isSet(object.baseInvestmintPeriodVolt)
-        ? Number(object.baseInvestmintPeriodVolt)
-        : 0,
+      halvingPeriodVoltBlocks: isSet(object.halvingPeriodVoltBlocks) ? Number(object.halvingPeriodVoltBlocks) : 0,
+      halvingPeriodAmpereBlocks: isSet(object.halvingPeriodAmpereBlocks) ? Number(object.halvingPeriodAmpereBlocks) : 0,
+      baseInvestmintPeriodVolt: isSet(object.baseInvestmintPeriodVolt) ? Number(object.baseInvestmintPeriodVolt) : 0,
       baseInvestmintPeriodAmpere: isSet(object.baseInvestmintPeriodAmpere)
         ? Number(object.baseInvestmintPeriodAmpere)
         : 0,
@@ -133,12 +127,10 @@ export const Params = {
       (obj.baseInvestmintPeriodVolt = Math.round(message.baseInvestmintPeriodVolt));
     message.baseInvestmintPeriodAmpere !== undefined &&
       (obj.baseInvestmintPeriodAmpere = Math.round(message.baseInvestmintPeriodAmpere));
-    message.minInvestmintPeriod !== undefined &&
-      (obj.minInvestmintPeriod = Math.round(message.minInvestmintPeriod));
-    message.baseInvestmintAmountVolt !== undefined &&
-      (obj.baseInvestmintAmountVolt = message.baseInvestmintAmountVolt
-        ? Coin.toJSON(message.baseInvestmintAmountVolt)
-        : undefined);
+    message.minInvestmintPeriod !== undefined && (obj.minInvestmintPeriod = Math.round(message.minInvestmintPeriod));
+    message.baseInvestmintAmountVolt !== undefined && (obj.baseInvestmintAmountVolt = message.baseInvestmintAmountVolt
+      ? Coin.toJSON(message.baseInvestmintAmountVolt)
+      : undefined);
     message.baseInvestmintAmountAmpere !== undefined &&
       (obj.baseInvestmintAmountAmpere = message.baseInvestmintAmountAmpere
         ? Coin.toJSON(message.baseInvestmintAmountAmpere)
@@ -155,11 +147,11 @@ export const Params = {
     message.baseInvestmintPeriodAmpere = object.baseInvestmintPeriodAmpere ?? 0;
     message.minInvestmintPeriod = object.minInvestmintPeriod ?? 0;
     message.baseInvestmintAmountVolt =
-      object.baseInvestmintAmountVolt !== undefined && object.baseInvestmintAmountVolt !== null
+      (object.baseInvestmintAmountVolt !== undefined && object.baseInvestmintAmountVolt !== null)
         ? Coin.fromPartial(object.baseInvestmintAmountVolt)
         : undefined;
     message.baseInvestmintAmountAmpere =
-      object.baseInvestmintAmountAmpere !== undefined && object.baseInvestmintAmountAmpere !== null
+      (object.baseInvestmintAmountAmpere !== undefined && object.baseInvestmintAmountAmpere !== null)
         ? Coin.fromPartial(object.baseInvestmintAmountAmpere)
         : undefined;
     return message;
@@ -168,21 +160,14 @@ export const Params = {
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
+export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {

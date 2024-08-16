@@ -59,9 +59,7 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      calculationPeriod: isSet(object.calculationPeriod)
-        ? Long.fromValue(object.calculationPeriod)
-        : Long.ZERO,
+      calculationPeriod: isSet(object.calculationPeriod) ? Long.fromValue(object.calculationPeriod) : Long.ZERO,
       dampingFactor: isSet(object.dampingFactor) ? String(object.dampingFactor) : "",
       tolerance: isSet(object.tolerance) ? String(object.tolerance) : "",
     };
@@ -78,10 +76,9 @@ export const Params = {
 
   fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
     const message = createBaseParams();
-    message.calculationPeriod =
-      object.calculationPeriod !== undefined && object.calculationPeriod !== null
-        ? Long.fromValue(object.calculationPeriod)
-        : Long.ZERO;
+    message.calculationPeriod = (object.calculationPeriod !== undefined && object.calculationPeriod !== null)
+      ? Long.fromValue(object.calculationPeriod)
+      : Long.ZERO;
     message.dampingFactor = object.dampingFactor ?? "";
     message.tolerance = object.tolerance ?? "";
     return message;
@@ -141,29 +138,21 @@ export const RankedParticle = {
   fromPartial<I extends Exact<DeepPartial<RankedParticle>, I>>(object: I): RankedParticle {
     const message = createBaseRankedParticle();
     message.particle = object.particle ?? "";
-    message.rank =
-      object.rank !== undefined && object.rank !== null ? Long.fromValue(object.rank) : Long.UZERO;
+    message.rank = (object.rank !== undefined && object.rank !== null) ? Long.fromValue(object.rank) : Long.UZERO;
     return message;
   },
 };
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
+export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {
