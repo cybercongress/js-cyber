@@ -30,7 +30,7 @@ import {
   MsgDepositWithinBatch,
   MsgSwapWithinBatch,
   MsgWithdrawWithinBatch,
-} from "./codec/tendermint/liquidity/v1beta1/tx";
+} from "./codec/cyber/liquidity/v1beta1/tx";
 
 const testAddress = "bostrom1frk9k38pvp70vheezhdfd4nvqnlsm9dw3j8hlq";
 const testAddress2 = "bostrom1frk9k38pvp70vheezhdfd4nvqnlsm9dw3j8hlw";

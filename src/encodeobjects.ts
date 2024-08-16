@@ -16,7 +16,7 @@ import {
   MsgDepositWithinBatch,
   MsgSwapWithinBatch,
   MsgWithdrawWithinBatch,
-} from "./codec/tendermint/liquidity/v1beta1/tx";
+} from "./codec/cyber/liquidity/v1beta1/tx";
 
 // Staking module
 

@@ -116,7 +116,7 @@ import {
   QueryLiquidityPoolResponse,
   QueryLiquidityPoolsResponse,
   QueryParamsResponse as QueryParamsResponseLiquidity,
-} from "./codec/tendermint/liquidity/v1beta1/query";
+} from "./codec/cyber/liquidity/v1beta1/query";
 import {
   BandwidthExtension,
   GraphExtension,

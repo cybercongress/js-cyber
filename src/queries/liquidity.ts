@@ -8,7 +8,7 @@ import {
   QueryLiquidityPoolResponse,
   QueryLiquidityPoolsResponse,
   QueryParamsResponse,
-} from "../codec/tendermint/liquidity/v1beta1/query";
+} from "../codec/cyber/liquidity/v1beta1/query";
 
 export interface LiquidityExtension {
   readonly liquidity: {
