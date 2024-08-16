@@ -1,4 +1,12 @@
+// The master version of this file is in the repo root. Eslint seems to have
+// problems using symbolic links for the config file, so we copy it to the packages.
+// To update:
+//   1. Go to the repo root
+//   2. Make edits in .eslintrc.js
+//   3. Run `find ./packages -name ".eslintrc.js" -exec cp .eslintrc.js {} \;`
+
 module.exports = {
+  root: true,
   env: {
     es6: true,
     jasmine: true,
@@ -7,8 +15,9 @@ module.exports = {
   },
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    ecmaVersion: 2020,
-    project: "../tsconfig.eslint.json",
+    ecmaVersion: 2018,
+    project: "./tsconfig.eslint.json",
+    tsconfigRootDir: __dirname,
   },
   plugins: ["@typescript-eslint", "prettier", "simple-import-sort", "import"],
   extends: [
@@ -30,36 +39,43 @@ module.exports = {
     "spaced-comment": ["warn", "always", { line: { markers: ["/ <reference"] } }],
     "import/no-cycle": "warn",
     "simple-import-sort/imports": "warn",
+    "simple-import-sort/exports": "warn",
     "@typescript-eslint/array-type": ["warn", { default: "array-simple" }],
     "@typescript-eslint/await-thenable": "warn",
     "@typescript-eslint/ban-types": "warn",
     "@typescript-eslint/explicit-function-return-type": ["warn", { allowExpressions: true }],
     "@typescript-eslint/explicit-member-accessibility": "warn",
-    // "@typescript-eslint/naming-convention": [
-    //   "warn",
-    //   {
-    //     selector: "default",
-    //     format: ["strictCamelCase"],
-    //   },
-    //   {
-    //     selector: "typeLike",
-    //     format: ["StrictPascalCase"],
-    //   },
-    //   {
-    //     selector: "enumMember",
-    //     format: ["StrictPascalCase"],
-    //   },
-    //   {
-    //     selector: "variable",
-    //     format: ["strictCamelCase"],
-    //     leadingUnderscore: "allow",
-    //   },
-    //   {
-    //     selector: "parameter",
-    //     format: ["strictCamelCase"],
-    //     leadingUnderscore: "allow",
-    //   },
-    // ],
+    "@typescript-eslint/naming-convention": [
+      "warn",
+      {
+        selector: "default",
+        format: ["strictCamelCase"],
+      },
+      {
+        selector: "typeLike",
+        format: ["StrictPascalCase"],
+      },
+      {
+        selector: "enumMember",
+        format: ["StrictPascalCase"],
+      },
+      {
+        selector: "variable",
+        format: ["strictCamelCase"],
+        leadingUnderscore: "allow",
+      },
+      {
+        selector: "parameter",
+        format: ["strictCamelCase"],
+        leadingUnderscore: "allow",
+      },
+      {
+        // For object literal keys we want to allow things like numbers (e.g. 35),
+        // type URLs (e.g. "/cosmos.feegrant.v1beta1.MsgGrantAllowance") or go-cyber-4.0.0-rc4 data (e.g. "0.14ucoin2")
+        selector: "objectLiteralProperty",
+        format: null,
+      },
+    ],
     "@typescript-eslint/no-dynamic-delete": "warn",
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-empty-interface": "off",
@@ -79,6 +95,7 @@ module.exports = {
         "@typescript-eslint/no-var-requires": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/explicit-member-accessibility": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
       },
     },
     {
