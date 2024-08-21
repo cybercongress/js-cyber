@@ -1,5 +1,6 @@
 import {
   AminoMsg,
+  coins,
   encodeSecp256k1Pubkey,
   isSecp256k1Pubkey,
   makeSignDoc as makeSignDocAmino,
@@ -88,13 +89,13 @@ import {
   MsgEditRoute,
   MsgEditRouteName,
 } from "./codec/cyber/grid/v1beta1/tx";
-import { MsgInvestmint } from "./codec/cyber/resources/v1beta1/tx";
 import {
   MsgCreatePool,
   MsgDepositWithinBatch,
   MsgSwapWithinBatch,
   MsgWithdrawWithinBatch,
 } from "./codec/cyber/liquidity/v1beta1/tx";
+import { MsgInvestmint } from "./codec/cyber/resources/v1beta1/tx";
 import { CyberClient } from "./cyberclient";
 import {
   MsgBeginRedelegateEncodeObject,
@@ -500,7 +501,7 @@ export class SigningCyberClient extends CyberClient {
       typeUrl: "/cosmwasm.wasm.v1.MsgInstantiateContract",
       value: MsgInstantiateContract.fromPartial({
         sender: senderAddress,
-        codeId: Long.fromString(new Uint53(codeId).toString()),
+        codeId: BigInt(new Uint53(codeId).toString()),
         label: label,
         msg: toUtf8(JSON.stringify(msg)),
         funds: [...(options.funds || [])],
@@ -557,7 +558,7 @@ export class SigningCyberClient extends CyberClient {
       value: MsgMigrateContract.fromPartial({
         sender: senderAddress,
         contract: contractAddress,
-        codeId: Long.fromString(new Uint53(codeId).toString()),
+        codeId: BigInt(new Uint53(codeId).toString()),
         msg: toUtf8(JSON.stringify(migrateMsg)),
       }),
     };
@@ -793,7 +794,7 @@ export class SigningCyberClient extends CyberClient {
     memo = "",
   ): Promise<DeliverTxResponse | string[]> {
     const timeoutTimestampNanoseconds = timeoutTimestamp
-      ? Long.fromNumber(timeoutTimestamp).multiply(1_000_000_000)
+      ? BigInt(timeoutTimestamp) * BigInt(1_000_000_000)
       : undefined;
     const transferMsg: MsgTransferEncodeObject = {
       typeUrl: "/ibc.applications.transfer.v1.MsgTransfer",
@@ -966,6 +967,7 @@ export class SigningCyberClient extends CyberClient {
     let usedFee: StdFee;
     if (fee == "auto" || typeof fee === "number") {
       const gasEstimation = await this.simulate(signerAddress, messages, memo);
+      console.log('gasEstimation', gasEstimation)
       // Starting with Cosmos SDK 0.47, we see many cases in which 1.3 is not enough anymore
       // E.g. https://github.com/cosmos/cosmos-sdk/issues/16020
       const multiplier = typeof fee === "number" ? fee : 1.4;
@@ -976,6 +978,8 @@ export class SigningCyberClient extends CyberClient {
     } else {
       usedFee = fee;
     }
+
+    console.log('usedFee', usedFee)
 
     const txRaw = await this.sign(signerAddress, messages, usedFee, memo);
     const txBytes = TxRaw.encode(txRaw).finish();

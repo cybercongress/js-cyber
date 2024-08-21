@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "cyber.grid.v1beta1";
 
@@ -51,7 +51,9 @@ export const Params = {
   },
 
   fromJSON(object: any): Params {
-    return { maxRoutes: isSet(object.maxRoutes) ? Number(object.maxRoutes) : 0 };
+    return {
+      maxRoutes: isSet(object.maxRoutes) ? Number(object.maxRoutes) : 0,
+    };
   },
 
   toJSON(message: Params): unknown {
@@ -130,7 +132,7 @@ export const Route = {
     message.destination !== undefined && (obj.destination = message.destination);
     message.name !== undefined && (obj.name = message.name);
     if (message.value) {
-      obj.value = message.value.map((e) => e ? Coin.toJSON(e) : undefined);
+      obj.value = message.value.map((e) => (e ? Coin.toJSON(e) : undefined));
     } else {
       obj.value = [];
     }
@@ -178,13 +180,15 @@ export const Value = {
   },
 
   fromJSON(object: any): Value {
-    return { value: Array.isArray(object?.value) ? object.value.map((e: any) => Coin.fromJSON(e)) : [] };
+    return {
+      value: Array.isArray(object?.value) ? object.value.map((e: any) => Coin.fromJSON(e)) : [],
+    };
   },
 
   toJSON(message: Value): unknown {
     const obj: any = {};
     if (message.value) {
-      obj.value = message.value.map((e) => e ? Coin.toJSON(e) : undefined);
+      obj.value = message.value.map((e) => (e ? Coin.toJSON(e) : undefined));
     } else {
       obj.value = [];
     }
@@ -200,14 +204,21 @@ export const Value = {
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Long
+  ? string | number | Long
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {

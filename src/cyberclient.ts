@@ -774,7 +774,7 @@ export class CyberClient {
     return allCodes.map((entry: CodeInfoResponse): Code => {
       assert(entry.creator && entry.codeId && entry.dataHash, "entry incomplete");
       return {
-        id: entry.codeId.toNumber(),
+        id: Number(entry.codeId),
         creator: entry.creator,
         checksum: toHex(entry.dataHash),
       };
@@ -791,7 +791,7 @@ export class CyberClient {
       "codeInfo missing or incomplete",
     );
     const codeDetails: CodeDetails = {
-      id: codeInfo.codeId.toNumber(),
+      id: Number(codeInfo.codeId),
       creator: codeInfo.creator,
       checksum: toHex(codeInfo.dataHash),
       data: data,
@@ -837,7 +837,7 @@ export class CyberClient {
     assert(contractInfo.codeId && contractInfo.creator && contractInfo.label, "contractInfo incomplete");
     return {
       address: retrievedAddress,
-      codeId: contractInfo.codeId.toNumber(),
+      codeId: Number(contractInfo.codeId),
       creator: contractInfo.creator,
       admin: contractInfo.admin || undefined,
       label: contractInfo.label,
@@ -860,7 +860,7 @@ export class CyberClient {
       assert(entry.operation && entry.codeId && entry.msg);
       return {
         operation: operations[entry.operation],
-        codeId: entry.codeId.toNumber(),
+        codeId: Number(entry.codeId),
         msg: JSON.parse(fromAscii(entry.msg)),
       };
     });

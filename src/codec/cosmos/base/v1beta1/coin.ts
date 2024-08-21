@@ -183,7 +183,9 @@ export const IntProto = {
   },
 
   fromJSON(object: any): IntProto {
-    return { int: isSet(object.int) ? String(object.int) : "" };
+    return {
+      int: isSet(object.int) ? String(object.int) : "",
+    };
   },
 
   toJSON(message: IntProto): unknown {
@@ -230,7 +232,9 @@ export const DecProto = {
   },
 
   fromJSON(object: any): DecProto {
-    return { dec: isSet(object.dec) ? String(object.dec) : "" };
+    return {
+      dec: isSet(object.dec) ? String(object.dec) : "",
+    };
   },
 
   toJSON(message: DecProto): unknown {
@@ -248,14 +252,21 @@ export const DecProto = {
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Long
+  ? string | number | Long
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {

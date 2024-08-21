@@ -1,26 +1,23 @@
 /* eslint-disable */
+import { NeuronBandwidth, Params } from "./types";
 import Long from "long";
 import _m0 from "protobufjs/minimal";
-import { NeuronBandwidth, Params } from "./types";
 
 export const protobufPackage = "cyber.bandwidth.v1beta1";
 
-export interface QueryLoadRequest {
-}
+export interface QueryLoadRequest {}
 
 export interface QueryLoadResponse {
   load: string;
 }
 
-export interface QueryPriceRequest {
-}
+export interface QueryPriceRequest {}
 
 export interface QueryPriceResponse {
   price: string;
 }
 
-export interface QueryTotalBandwidthRequest {
-}
+export interface QueryTotalBandwidthRequest {}
 
 export interface QueryTotalBandwidthResponse {
   totalBandwidth: Long;
@@ -34,8 +31,7 @@ export interface QueryNeuronBandwidthResponse {
   neuronBandwidth?: NeuronBandwidth;
 }
 
-export interface QueryParamsRequest {
-}
+export interface QueryParamsRequest {}
 
 export interface QueryParamsResponse {
   params?: Params;
@@ -111,7 +107,9 @@ export const QueryLoadResponse = {
   },
 
   fromJSON(object: any): QueryLoadResponse {
-    return { load: isSet(object.load) ? String(object.load) : "" };
+    return {
+      load: isSet(object.load) ? String(object.load) : "",
+    };
   },
 
   toJSON(message: QueryLoadResponse): unknown {
@@ -197,7 +195,9 @@ export const QueryPriceResponse = {
   },
 
   fromJSON(object: any): QueryPriceResponse {
-    return { price: isSet(object.price) ? String(object.price) : "" };
+    return {
+      price: isSet(object.price) ? String(object.price) : "",
+    };
   },
 
   toJSON(message: QueryPriceResponse): unknown {
@@ -283,20 +283,26 @@ export const QueryTotalBandwidthResponse = {
   },
 
   fromJSON(object: any): QueryTotalBandwidthResponse {
-    return { totalBandwidth: isSet(object.totalBandwidth) ? Long.fromValue(object.totalBandwidth) : Long.UZERO };
+    return {
+      totalBandwidth: isSet(object.totalBandwidth) ? Long.fromValue(object.totalBandwidth) : Long.UZERO,
+    };
   },
 
   toJSON(message: QueryTotalBandwidthResponse): unknown {
     const obj: any = {};
-    message.totalBandwidth !== undefined && (obj.totalBandwidth = (message.totalBandwidth || Long.UZERO).toString());
+    message.totalBandwidth !== undefined &&
+      (obj.totalBandwidth = (message.totalBandwidth || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryTotalBandwidthResponse>, I>>(object: I): QueryTotalBandwidthResponse {
+  fromPartial<I extends Exact<DeepPartial<QueryTotalBandwidthResponse>, I>>(
+    object: I,
+  ): QueryTotalBandwidthResponse {
     const message = createBaseQueryTotalBandwidthResponse();
-    message.totalBandwidth = (object.totalBandwidth !== undefined && object.totalBandwidth !== null)
-      ? Long.fromValue(object.totalBandwidth)
-      : Long.UZERO;
+    message.totalBandwidth =
+      object.totalBandwidth !== undefined && object.totalBandwidth !== null
+        ? Long.fromValue(object.totalBandwidth)
+        : Long.UZERO;
     return message;
   },
 };
@@ -332,7 +338,9 @@ export const QueryNeuronBandwidthRequest = {
   },
 
   fromJSON(object: any): QueryNeuronBandwidthRequest {
-    return { neuron: isSet(object.neuron) ? String(object.neuron) : "" };
+    return {
+      neuron: isSet(object.neuron) ? String(object.neuron) : "",
+    };
   },
 
   toJSON(message: QueryNeuronBandwidthRequest): unknown {
@@ -341,7 +349,9 @@ export const QueryNeuronBandwidthRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryNeuronBandwidthRequest>, I>>(object: I): QueryNeuronBandwidthRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryNeuronBandwidthRequest>, I>>(
+    object: I,
+  ): QueryNeuronBandwidthRequest {
     const message = createBaseQueryNeuronBandwidthRequest();
     message.neuron = object.neuron ?? "";
     return message;
@@ -380,22 +390,29 @@ export const QueryNeuronBandwidthResponse = {
 
   fromJSON(object: any): QueryNeuronBandwidthResponse {
     return {
-      neuronBandwidth: isSet(object.neuronBandwidth) ? NeuronBandwidth.fromJSON(object.neuronBandwidth) : undefined,
+      neuronBandwidth: isSet(object.neuronBandwidth)
+        ? NeuronBandwidth.fromJSON(object.neuronBandwidth)
+        : undefined,
     };
   },
 
   toJSON(message: QueryNeuronBandwidthResponse): unknown {
     const obj: any = {};
     message.neuronBandwidth !== undefined &&
-      (obj.neuronBandwidth = message.neuronBandwidth ? NeuronBandwidth.toJSON(message.neuronBandwidth) : undefined);
+      (obj.neuronBandwidth = message.neuronBandwidth
+        ? NeuronBandwidth.toJSON(message.neuronBandwidth)
+        : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryNeuronBandwidthResponse>, I>>(object: I): QueryNeuronBandwidthResponse {
+  fromPartial<I extends Exact<DeepPartial<QueryNeuronBandwidthResponse>, I>>(
+    object: I,
+  ): QueryNeuronBandwidthResponse {
     const message = createBaseQueryNeuronBandwidthResponse();
-    message.neuronBandwidth = (object.neuronBandwidth !== undefined && object.neuronBandwidth !== null)
-      ? NeuronBandwidth.fromPartial(object.neuronBandwidth)
-      : undefined;
+    message.neuronBandwidth =
+      object.neuronBandwidth !== undefined && object.neuronBandwidth !== null
+        ? NeuronBandwidth.fromPartial(object.neuronBandwidth)
+        : undefined;
     return message;
   },
 };
@@ -470,7 +487,9 @@ export const QueryParamsResponse = {
   },
 
   fromJSON(object: any): QueryParamsResponse {
-    return { params: isSet(object.params) ? Params.fromJSON(object.params) : undefined };
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+    };
   },
 
   toJSON(message: QueryParamsResponse): unknown {
@@ -481,9 +500,8 @@ export const QueryParamsResponse = {
 
   fromPartial<I extends Exact<DeepPartial<QueryParamsResponse>, I>>(object: I): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = (object.params !== undefined && object.params !== null)
-      ? Params.fromPartial(object.params)
-      : undefined;
+    message.params =
+      object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
 };
@@ -498,9 +516,7 @@ export interface Query {
 
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-  private readonly service: string;
-  constructor(rpc: Rpc, opts?: { service?: string }) {
-    this.service = opts?.service || "cyber.bandwidth.v1beta1.Query";
+  constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.Load = this.Load.bind(this);
     this.Price = this.Price.bind(this);
@@ -510,31 +526,31 @@ export class QueryClientImpl implements Query {
   }
   Load(request: QueryLoadRequest): Promise<QueryLoadResponse> {
     const data = QueryLoadRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "Load", data);
+    const promise = this.rpc.request("cyber.bandwidth.v1beta1.Query", "Load", data);
     return promise.then((data) => QueryLoadResponse.decode(new _m0.Reader(data)));
   }
 
   Price(request: QueryPriceRequest): Promise<QueryPriceResponse> {
     const data = QueryPriceRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "Price", data);
+    const promise = this.rpc.request("cyber.bandwidth.v1beta1.Query", "Price", data);
     return promise.then((data) => QueryPriceResponse.decode(new _m0.Reader(data)));
   }
 
   TotalBandwidth(request: QueryTotalBandwidthRequest): Promise<QueryTotalBandwidthResponse> {
     const data = QueryTotalBandwidthRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "TotalBandwidth", data);
+    const promise = this.rpc.request("cyber.bandwidth.v1beta1.Query", "TotalBandwidth", data);
     return promise.then((data) => QueryTotalBandwidthResponse.decode(new _m0.Reader(data)));
   }
 
   NeuronBandwidth(request: QueryNeuronBandwidthRequest): Promise<QueryNeuronBandwidthResponse> {
     const data = QueryNeuronBandwidthRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "NeuronBandwidth", data);
+    const promise = this.rpc.request("cyber.bandwidth.v1beta1.Query", "NeuronBandwidth", data);
     return promise.then((data) => QueryNeuronBandwidthResponse.decode(new _m0.Reader(data)));
   }
 
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "Params", data);
+    const promise = this.rpc.request("cyber.bandwidth.v1beta1.Query", "Params", data);
     return promise.then((data) => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
 }
@@ -545,14 +561,21 @@ interface Rpc {
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Long
+  ? string | number | Long
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {

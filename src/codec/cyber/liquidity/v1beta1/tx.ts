@@ -1,7 +1,7 @@
 /* eslint-disable */
+import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import Long from "long";
 import _m0 from "protobufjs/minimal";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
 
 export const protobufPackage = "cyber.liquidity.v1beta1";
 
@@ -24,8 +24,7 @@ export interface MsgCreatePool {
 }
 
 /** MsgCreatePoolResponse defines the Msg/CreatePool response type. */
-export interface MsgCreatePoolResponse {
-}
+export interface MsgCreatePoolResponse {}
 
 /**
  * `MsgDepositWithinBatch defines` an `sdk.Msg` type that supports submitting
@@ -51,8 +50,7 @@ export interface MsgDepositWithinBatch {
  * MsgDepositWithinBatchResponse defines the Msg/DepositWithinBatch response
  * type.
  */
-export interface MsgDepositWithinBatchResponse {
-}
+export interface MsgDepositWithinBatchResponse {}
 
 /**
  * `MsgWithdrawWithinBatch` defines an `sdk.Msg` type that supports submitting
@@ -77,8 +75,7 @@ export interface MsgWithdrawWithinBatch {
  * MsgWithdrawWithinBatchResponse defines the Msg/WithdrawWithinBatch response
  * type.
  */
-export interface MsgWithdrawWithinBatchResponse {
-}
+export interface MsgWithdrawWithinBatchResponse {}
 
 /**
  * `MsgSwapWithinBatch` defines an sdk.Msg type that supports submitting a swap
@@ -126,8 +123,7 @@ export interface MsgSwapWithinBatch {
 }
 
 /** MsgSwapWithinBatchResponse defines the Msg/Swap response type. */
-export interface MsgSwapWithinBatchResponse {
-}
+export interface MsgSwapWithinBatchResponse {}
 
 function createBaseMsgCreatePool(): MsgCreatePool {
   return { poolCreatorAddress: "", poolTypeId: 0, depositCoins: [] };
@@ -175,7 +171,9 @@ export const MsgCreatePool = {
     return {
       poolCreatorAddress: isSet(object.poolCreatorAddress) ? String(object.poolCreatorAddress) : "",
       poolTypeId: isSet(object.poolTypeId) ? Number(object.poolTypeId) : 0,
-      depositCoins: Array.isArray(object?.depositCoins) ? object.depositCoins.map((e: any) => Coin.fromJSON(e)) : [],
+      depositCoins: Array.isArray(object?.depositCoins)
+        ? object.depositCoins.map((e: any) => Coin.fromJSON(e))
+        : [],
     };
   },
 
@@ -184,7 +182,7 @@ export const MsgCreatePool = {
     message.poolCreatorAddress !== undefined && (obj.poolCreatorAddress = message.poolCreatorAddress);
     message.poolTypeId !== undefined && (obj.poolTypeId = Math.round(message.poolTypeId));
     if (message.depositCoins) {
-      obj.depositCoins = message.depositCoins.map((e) => e ? Coin.toJSON(e) : undefined);
+      obj.depositCoins = message.depositCoins.map((e) => (e ? Coin.toJSON(e) : undefined));
     } else {
       obj.depositCoins = [];
     }
@@ -285,7 +283,9 @@ export const MsgDepositWithinBatch = {
     return {
       depositorAddress: isSet(object.depositorAddress) ? String(object.depositorAddress) : "",
       poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
-      depositCoins: Array.isArray(object?.depositCoins) ? object.depositCoins.map((e: any) => Coin.fromJSON(e)) : [],
+      depositCoins: Array.isArray(object?.depositCoins)
+        ? object.depositCoins.map((e: any) => Coin.fromJSON(e))
+        : [],
     };
   },
 
@@ -294,7 +294,7 @@ export const MsgDepositWithinBatch = {
     message.depositorAddress !== undefined && (obj.depositorAddress = message.depositorAddress);
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     if (message.depositCoins) {
-      obj.depositCoins = message.depositCoins.map((e) => e ? Coin.toJSON(e) : undefined);
+      obj.depositCoins = message.depositCoins.map((e) => (e ? Coin.toJSON(e) : undefined));
     } else {
       obj.depositCoins = [];
     }
@@ -304,9 +304,8 @@ export const MsgDepositWithinBatch = {
   fromPartial<I extends Exact<DeepPartial<MsgDepositWithinBatch>, I>>(object: I): MsgDepositWithinBatch {
     const message = createBaseMsgDepositWithinBatch();
     message.depositorAddress = object.depositorAddress ?? "";
-    message.poolId = (object.poolId !== undefined && object.poolId !== null)
-      ? Long.fromValue(object.poolId)
-      : Long.UZERO;
+    message.poolId =
+      object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.depositCoins = object.depositCoins?.map((e) => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -345,7 +344,9 @@ export const MsgDepositWithinBatchResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgDepositWithinBatchResponse>, I>>(_: I): MsgDepositWithinBatchResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgDepositWithinBatchResponse>, I>>(
+    _: I,
+  ): MsgDepositWithinBatchResponse {
     const message = createBaseMsgDepositWithinBatchResponse();
     return message;
   },
@@ -405,19 +406,20 @@ export const MsgWithdrawWithinBatch = {
     const obj: any = {};
     message.withdrawerAddress !== undefined && (obj.withdrawerAddress = message.withdrawerAddress);
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
-    message.poolCoin !== undefined && (obj.poolCoin = message.poolCoin ? Coin.toJSON(message.poolCoin) : undefined);
+    message.poolCoin !== undefined &&
+      (obj.poolCoin = message.poolCoin ? Coin.toJSON(message.poolCoin) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgWithdrawWithinBatch>, I>>(object: I): MsgWithdrawWithinBatch {
     const message = createBaseMsgWithdrawWithinBatch();
     message.withdrawerAddress = object.withdrawerAddress ?? "";
-    message.poolId = (object.poolId !== undefined && object.poolId !== null)
-      ? Long.fromValue(object.poolId)
-      : Long.UZERO;
-    message.poolCoin = (object.poolCoin !== undefined && object.poolCoin !== null)
-      ? Coin.fromPartial(object.poolCoin)
-      : undefined;
+    message.poolId =
+      object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.poolCoin =
+      object.poolCoin !== undefined && object.poolCoin !== null
+        ? Coin.fromPartial(object.poolCoin)
+        : undefined;
     return message;
   },
 };
@@ -455,7 +457,9 @@ export const MsgWithdrawWithinBatchResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgWithdrawWithinBatchResponse>, I>>(_: I): MsgWithdrawWithinBatchResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgWithdrawWithinBatchResponse>, I>>(
+    _: I,
+  ): MsgWithdrawWithinBatchResponse {
     const message = createBaseMsgWithdrawWithinBatchResponse();
     return message;
   },
@@ -552,7 +556,8 @@ export const MsgSwapWithinBatch = {
     message.swapRequesterAddress !== undefined && (obj.swapRequesterAddress = message.swapRequesterAddress);
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.swapTypeId !== undefined && (obj.swapTypeId = Math.round(message.swapTypeId));
-    message.offerCoin !== undefined && (obj.offerCoin = message.offerCoin ? Coin.toJSON(message.offerCoin) : undefined);
+    message.offerCoin !== undefined &&
+      (obj.offerCoin = message.offerCoin ? Coin.toJSON(message.offerCoin) : undefined);
     message.demandCoinDenom !== undefined && (obj.demandCoinDenom = message.demandCoinDenom);
     message.offerCoinFee !== undefined &&
       (obj.offerCoinFee = message.offerCoinFee ? Coin.toJSON(message.offerCoinFee) : undefined);
@@ -563,17 +568,18 @@ export const MsgSwapWithinBatch = {
   fromPartial<I extends Exact<DeepPartial<MsgSwapWithinBatch>, I>>(object: I): MsgSwapWithinBatch {
     const message = createBaseMsgSwapWithinBatch();
     message.swapRequesterAddress = object.swapRequesterAddress ?? "";
-    message.poolId = (object.poolId !== undefined && object.poolId !== null)
-      ? Long.fromValue(object.poolId)
-      : Long.UZERO;
+    message.poolId =
+      object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.swapTypeId = object.swapTypeId ?? 0;
-    message.offerCoin = (object.offerCoin !== undefined && object.offerCoin !== null)
-      ? Coin.fromPartial(object.offerCoin)
-      : undefined;
+    message.offerCoin =
+      object.offerCoin !== undefined && object.offerCoin !== null
+        ? Coin.fromPartial(object.offerCoin)
+        : undefined;
     message.demandCoinDenom = object.demandCoinDenom ?? "";
-    message.offerCoinFee = (object.offerCoinFee !== undefined && object.offerCoinFee !== null)
-      ? Coin.fromPartial(object.offerCoinFee)
-      : undefined;
+    message.offerCoinFee =
+      object.offerCoinFee !== undefined && object.offerCoinFee !== null
+        ? Coin.fromPartial(object.offerCoinFee)
+        : undefined;
     message.orderPrice = object.orderPrice ?? "";
     return message;
   },
@@ -632,9 +638,7 @@ export interface Msg {
 
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-  private readonly service: string;
-  constructor(rpc: Rpc, opts?: { service?: string }) {
-    this.service = opts?.service || "cyber.liquidity.v1beta1.Msg";
+  constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.CreatePool = this.CreatePool.bind(this);
     this.DepositWithinBatch = this.DepositWithinBatch.bind(this);
@@ -643,25 +647,25 @@ export class MsgClientImpl implements Msg {
   }
   CreatePool(request: MsgCreatePool): Promise<MsgCreatePoolResponse> {
     const data = MsgCreatePool.encode(request).finish();
-    const promise = this.rpc.request(this.service, "CreatePool", data);
+    const promise = this.rpc.request("cyber.liquidity.v1beta1.Msg", "CreatePool", data);
     return promise.then((data) => MsgCreatePoolResponse.decode(new _m0.Reader(data)));
   }
 
   DepositWithinBatch(request: MsgDepositWithinBatch): Promise<MsgDepositWithinBatchResponse> {
     const data = MsgDepositWithinBatch.encode(request).finish();
-    const promise = this.rpc.request(this.service, "DepositWithinBatch", data);
+    const promise = this.rpc.request("cyber.liquidity.v1beta1.Msg", "DepositWithinBatch", data);
     return promise.then((data) => MsgDepositWithinBatchResponse.decode(new _m0.Reader(data)));
   }
 
   WithdrawWithinBatch(request: MsgWithdrawWithinBatch): Promise<MsgWithdrawWithinBatchResponse> {
     const data = MsgWithdrawWithinBatch.encode(request).finish();
-    const promise = this.rpc.request(this.service, "WithdrawWithinBatch", data);
+    const promise = this.rpc.request("cyber.liquidity.v1beta1.Msg", "WithdrawWithinBatch", data);
     return promise.then((data) => MsgWithdrawWithinBatchResponse.decode(new _m0.Reader(data)));
   }
 
   Swap(request: MsgSwapWithinBatch): Promise<MsgSwapWithinBatchResponse> {
     const data = MsgSwapWithinBatch.encode(request).finish();
-    const promise = this.rpc.request(this.service, "Swap", data);
+    const promise = this.rpc.request("cyber.liquidity.v1beta1.Msg", "Swap", data);
     return promise.then((data) => MsgSwapWithinBatchResponse.decode(new _m0.Reader(data)));
   }
 }
@@ -672,14 +676,21 @@ interface Rpc {
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Long
+  ? string | number | Long
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {

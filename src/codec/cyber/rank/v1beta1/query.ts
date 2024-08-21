@@ -1,13 +1,12 @@
 /* eslint-disable */
+import { Params, RankedParticle } from "./types";
+import { PageRequest, PageResponse } from "./pagination";
 import Long from "long";
 import _m0 from "protobufjs/minimal";
-import { PageRequest, PageResponse } from "./pagination";
-import { Params, RankedParticle } from "./types";
 
 export const protobufPackage = "cyber.rank.v1beta1";
 
-export interface QueryParamsRequest {
-}
+export interface QueryParamsRequest {}
 
 export interface QueryParamsResponse {
   params?: Params;
@@ -58,8 +57,7 @@ export interface QueryNegentropyParticleResponse {
   entropy: Long;
 }
 
-export interface QueryNegentropyRequest {
-}
+export interface QueryNegentropyRequest {}
 
 export interface QueryNegentropyResponse {
   negentropy: Long;
@@ -143,7 +141,9 @@ export const QueryParamsResponse = {
   },
 
   fromJSON(object: any): QueryParamsResponse {
-    return { params: isSet(object.params) ? Params.fromJSON(object.params) : undefined };
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+    };
   },
 
   toJSON(message: QueryParamsResponse): unknown {
@@ -154,9 +154,8 @@ export const QueryParamsResponse = {
 
   fromPartial<I extends Exact<DeepPartial<QueryParamsResponse>, I>>(object: I): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = (object.params !== undefined && object.params !== null)
-      ? Params.fromPartial(object.params)
-      : undefined;
+    message.params =
+      object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
 };
@@ -192,7 +191,9 @@ export const QueryRankRequest = {
   },
 
   fromJSON(object: any): QueryRankRequest {
-    return { particle: isSet(object.particle) ? String(object.particle) : "" };
+    return {
+      particle: isSet(object.particle) ? String(object.particle) : "",
+    };
   },
 
   toJSON(message: QueryRankRequest): unknown {
@@ -239,7 +240,9 @@ export const QueryRankResponse = {
   },
 
   fromJSON(object: any): QueryRankResponse {
-    return { rank: isSet(object.rank) ? Long.fromValue(object.rank) : Long.UZERO };
+    return {
+      rank: isSet(object.rank) ? Long.fromValue(object.rank) : Long.UZERO,
+    };
   },
 
   toJSON(message: QueryRankResponse): unknown {
@@ -250,7 +253,8 @@ export const QueryRankResponse = {
 
   fromPartial<I extends Exact<DeepPartial<QueryRankResponse>, I>>(object: I): QueryRankResponse {
     const message = createBaseQueryRankResponse();
-    message.rank = (object.rank !== undefined && object.rank !== null) ? Long.fromValue(object.rank) : Long.UZERO;
+    message.rank =
+      object.rank !== undefined && object.rank !== null ? Long.fromValue(object.rank) : Long.UZERO;
     return message;
   },
 };
@@ -309,9 +313,10 @@ export const QuerySearchRequest = {
   fromPartial<I extends Exact<DeepPartial<QuerySearchRequest>, I>>(object: I): QuerySearchRequest {
     const message = createBaseQuerySearchRequest();
     message.particle = object.particle ?? "";
-    message.pagination = (object.pagination !== undefined && object.pagination !== null)
-      ? PageRequest.fromPartial(object.pagination)
-      : undefined;
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
     return message;
   },
 };
@@ -362,7 +367,7 @@ export const QuerySearchResponse = {
   toJSON(message: QuerySearchResponse): unknown {
     const obj: any = {};
     if (message.result) {
-      obj.result = message.result.map((e) => e ? RankedParticle.toJSON(e) : undefined);
+      obj.result = message.result.map((e) => (e ? RankedParticle.toJSON(e) : undefined));
     } else {
       obj.result = [];
     }
@@ -374,9 +379,10 @@ export const QuerySearchResponse = {
   fromPartial<I extends Exact<DeepPartial<QuerySearchResponse>, I>>(object: I): QuerySearchResponse {
     const message = createBaseQuerySearchResponse();
     message.result = object.result?.map((e) => RankedParticle.fromPartial(e)) || [];
-    message.pagination = (object.pagination !== undefined && object.pagination !== null)
-      ? PageResponse.fromPartial(object.pagination)
-      : undefined;
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
     return message;
   },
 };
@@ -412,7 +418,9 @@ export const QueryTopRequest = {
   },
 
   fromJSON(object: any): QueryTopRequest {
-    return { pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined };
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
+    };
   },
 
   toJSON(message: QueryTopRequest): unknown {
@@ -424,9 +432,10 @@ export const QueryTopRequest = {
 
   fromPartial<I extends Exact<DeepPartial<QueryTopRequest>, I>>(object: I): QueryTopRequest {
     const message = createBaseQueryTopRequest();
-    message.pagination = (object.pagination !== undefined && object.pagination !== null)
-      ? PageRequest.fromPartial(object.pagination)
-      : undefined;
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
     return message;
   },
 };
@@ -535,7 +544,10 @@ export const QueryIsAnyLinkExistRequest = {
   },
 
   fromJSON(object: any): QueryIsAnyLinkExistRequest {
-    return { from: isSet(object.from) ? String(object.from) : "", to: isSet(object.to) ? String(object.to) : "" };
+    return {
+      from: isSet(object.from) ? String(object.from) : "",
+      to: isSet(object.to) ? String(object.to) : "",
+    };
   },
 
   toJSON(message: QueryIsAnyLinkExistRequest): unknown {
@@ -545,7 +557,9 @@ export const QueryIsAnyLinkExistRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryIsAnyLinkExistRequest>, I>>(object: I): QueryIsAnyLinkExistRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryIsAnyLinkExistRequest>, I>>(
+    object: I,
+  ): QueryIsAnyLinkExistRequest {
     const message = createBaseQueryIsAnyLinkExistRequest();
     message.from = object.from ?? "";
     message.to = object.to ?? "";
@@ -584,7 +598,9 @@ export const QueryLinkExistResponse = {
   },
 
   fromJSON(object: any): QueryLinkExistResponse {
-    return { exist: isSet(object.exist) ? Boolean(object.exist) : false };
+    return {
+      exist: isSet(object.exist) ? Boolean(object.exist) : false,
+    };
   },
 
   toJSON(message: QueryLinkExistResponse): unknown {
@@ -631,7 +647,9 @@ export const QueryNegentropyPartilceRequest = {
   },
 
   fromJSON(object: any): QueryNegentropyPartilceRequest {
-    return { particle: isSet(object.particle) ? String(object.particle) : "" };
+    return {
+      particle: isSet(object.particle) ? String(object.particle) : "",
+    };
   },
 
   toJSON(message: QueryNegentropyPartilceRequest): unknown {
@@ -680,7 +698,9 @@ export const QueryNegentropyParticleResponse = {
   },
 
   fromJSON(object: any): QueryNegentropyParticleResponse {
-    return { entropy: isSet(object.entropy) ? Long.fromValue(object.entropy) : Long.UZERO };
+    return {
+      entropy: isSet(object.entropy) ? Long.fromValue(object.entropy) : Long.UZERO,
+    };
   },
 
   toJSON(message: QueryNegentropyParticleResponse): unknown {
@@ -693,9 +713,8 @@ export const QueryNegentropyParticleResponse = {
     object: I,
   ): QueryNegentropyParticleResponse {
     const message = createBaseQueryNegentropyParticleResponse();
-    message.entropy = (object.entropy !== undefined && object.entropy !== null)
-      ? Long.fromValue(object.entropy)
-      : Long.UZERO;
+    message.entropy =
+      object.entropy !== undefined && object.entropy !== null ? Long.fromValue(object.entropy) : Long.UZERO;
     return message;
   },
 };
@@ -770,7 +789,9 @@ export const QueryNegentropyResponse = {
   },
 
   fromJSON(object: any): QueryNegentropyResponse {
-    return { negentropy: isSet(object.negentropy) ? Long.fromValue(object.negentropy) : Long.UZERO };
+    return {
+      negentropy: isSet(object.negentropy) ? Long.fromValue(object.negentropy) : Long.UZERO,
+    };
   },
 
   toJSON(message: QueryNegentropyResponse): unknown {
@@ -781,9 +802,10 @@ export const QueryNegentropyResponse = {
 
   fromPartial<I extends Exact<DeepPartial<QueryNegentropyResponse>, I>>(object: I): QueryNegentropyResponse {
     const message = createBaseQueryNegentropyResponse();
-    message.negentropy = (object.negentropy !== undefined && object.negentropy !== null)
-      ? Long.fromValue(object.negentropy)
-      : Long.UZERO;
+    message.negentropy =
+      object.negentropy !== undefined && object.negentropy !== null
+        ? Long.fromValue(object.negentropy)
+        : Long.UZERO;
     return message;
   },
 };
@@ -819,7 +841,9 @@ export const QueryKarmaRequest = {
   },
 
   fromJSON(object: any): QueryKarmaRequest {
-    return { neuron: isSet(object.neuron) ? String(object.neuron) : "" };
+    return {
+      neuron: isSet(object.neuron) ? String(object.neuron) : "",
+    };
   },
 
   toJSON(message: QueryKarmaRequest): unknown {
@@ -866,7 +890,9 @@ export const QueryKarmaResponse = {
   },
 
   fromJSON(object: any): QueryKarmaResponse {
-    return { karma: isSet(object.karma) ? Long.fromValue(object.karma) : Long.UZERO };
+    return {
+      karma: isSet(object.karma) ? Long.fromValue(object.karma) : Long.UZERO,
+    };
   },
 
   toJSON(message: QueryKarmaResponse): unknown {
@@ -877,7 +903,8 @@ export const QueryKarmaResponse = {
 
   fromPartial<I extends Exact<DeepPartial<QueryKarmaResponse>, I>>(object: I): QueryKarmaResponse {
     const message = createBaseQueryKarmaResponse();
-    message.karma = (object.karma !== undefined && object.karma !== null) ? Long.fromValue(object.karma) : Long.UZERO;
+    message.karma =
+      object.karma !== undefined && object.karma !== null ? Long.fromValue(object.karma) : Long.UZERO;
     return message;
   },
 };
@@ -897,9 +924,7 @@ export interface Query {
 
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-  private readonly service: string;
-  constructor(rpc: Rpc, opts?: { service?: string }) {
-    this.service = opts?.service || "cyber.rank.v1beta1.Query";
+  constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.Params = this.Params.bind(this);
     this.Rank = this.Rank.bind(this);
@@ -914,61 +939,61 @@ export class QueryClientImpl implements Query {
   }
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "Params", data);
+    const promise = this.rpc.request("cyber.rank.v1beta1.Query", "Params", data);
     return promise.then((data) => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
 
   Rank(request: QueryRankRequest): Promise<QueryRankResponse> {
     const data = QueryRankRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "Rank", data);
+    const promise = this.rpc.request("cyber.rank.v1beta1.Query", "Rank", data);
     return promise.then((data) => QueryRankResponse.decode(new _m0.Reader(data)));
   }
 
   Search(request: QuerySearchRequest): Promise<QuerySearchResponse> {
     const data = QuerySearchRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "Search", data);
+    const promise = this.rpc.request("cyber.rank.v1beta1.Query", "Search", data);
     return promise.then((data) => QuerySearchResponse.decode(new _m0.Reader(data)));
   }
 
   Backlinks(request: QuerySearchRequest): Promise<QuerySearchResponse> {
     const data = QuerySearchRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "Backlinks", data);
+    const promise = this.rpc.request("cyber.rank.v1beta1.Query", "Backlinks", data);
     return promise.then((data) => QuerySearchResponse.decode(new _m0.Reader(data)));
   }
 
   Top(request: QueryTopRequest): Promise<QuerySearchResponse> {
     const data = QueryTopRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "Top", data);
+    const promise = this.rpc.request("cyber.rank.v1beta1.Query", "Top", data);
     return promise.then((data) => QuerySearchResponse.decode(new _m0.Reader(data)));
   }
 
   IsLinkExist(request: QueryIsLinkExistRequest): Promise<QueryLinkExistResponse> {
     const data = QueryIsLinkExistRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "IsLinkExist", data);
+    const promise = this.rpc.request("cyber.rank.v1beta1.Query", "IsLinkExist", data);
     return promise.then((data) => QueryLinkExistResponse.decode(new _m0.Reader(data)));
   }
 
   IsAnyLinkExist(request: QueryIsAnyLinkExistRequest): Promise<QueryLinkExistResponse> {
     const data = QueryIsAnyLinkExistRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "IsAnyLinkExist", data);
+    const promise = this.rpc.request("cyber.rank.v1beta1.Query", "IsAnyLinkExist", data);
     return promise.then((data) => QueryLinkExistResponse.decode(new _m0.Reader(data)));
   }
 
   ParticleNegentropy(request: QueryNegentropyPartilceRequest): Promise<QueryNegentropyParticleResponse> {
     const data = QueryNegentropyPartilceRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "ParticleNegentropy", data);
+    const promise = this.rpc.request("cyber.rank.v1beta1.Query", "ParticleNegentropy", data);
     return promise.then((data) => QueryNegentropyParticleResponse.decode(new _m0.Reader(data)));
   }
 
   Negentropy(request: QueryNegentropyRequest): Promise<QueryNegentropyResponse> {
     const data = QueryNegentropyRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "Negentropy", data);
+    const promise = this.rpc.request("cyber.rank.v1beta1.Query", "Negentropy", data);
     return promise.then((data) => QueryNegentropyResponse.decode(new _m0.Reader(data)));
   }
 
   Karma(request: QueryKarmaRequest): Promise<QueryKarmaResponse> {
     const data = QueryKarmaRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "Karma", data);
+    const promise = this.rpc.request("cyber.rank.v1beta1.Query", "Karma", data);
     return promise.then((data) => QueryKarmaResponse.decode(new _m0.Reader(data)));
   }
 }
@@ -979,14 +1004,21 @@ interface Rpc {
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Long
+  ? string | number | Long
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {

@@ -4,8 +4,7 @@ import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "cyber.graph.v1beta1";
 
-export interface QueryGraphStatsRequest {
-}
+export interface QueryGraphStatsRequest {}
 
 export interface QueryGraphStatsResponse {
   cyberlinks: Long;
@@ -103,12 +102,14 @@ export const QueryGraphStatsResponse = {
 
   fromPartial<I extends Exact<DeepPartial<QueryGraphStatsResponse>, I>>(object: I): QueryGraphStatsResponse {
     const message = createBaseQueryGraphStatsResponse();
-    message.cyberlinks = (object.cyberlinks !== undefined && object.cyberlinks !== null)
-      ? Long.fromValue(object.cyberlinks)
-      : Long.UZERO;
-    message.particles = (object.particles !== undefined && object.particles !== null)
-      ? Long.fromValue(object.particles)
-      : Long.UZERO;
+    message.cyberlinks =
+      object.cyberlinks !== undefined && object.cyberlinks !== null
+        ? Long.fromValue(object.cyberlinks)
+        : Long.UZERO;
+    message.particles =
+      object.particles !== undefined && object.particles !== null
+        ? Long.fromValue(object.particles)
+        : Long.UZERO;
     return message;
   },
 };
@@ -119,15 +120,13 @@ export interface Query {
 
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-  private readonly service: string;
-  constructor(rpc: Rpc, opts?: { service?: string }) {
-    this.service = opts?.service || "cyber.graph.v1beta1.Query";
+  constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.GraphStats = this.GraphStats.bind(this);
   }
   GraphStats(request: QueryGraphStatsRequest): Promise<QueryGraphStatsResponse> {
     const data = QueryGraphStatsRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "GraphStats", data);
+    const promise = this.rpc.request("cyber.graph.v1beta1.Query", "GraphStats", data);
     return promise.then((data) => QueryGraphStatsResponse.decode(new _m0.Reader(data)));
   }
 }
@@ -138,14 +137,21 @@ interface Rpc {
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Long
+  ? string | number | Long
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {

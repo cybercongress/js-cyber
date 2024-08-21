@@ -1,8 +1,8 @@
 /* eslint-disable */
+import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { MsgDepositWithinBatch, MsgWithdrawWithinBatch, MsgSwapWithinBatch } from "./tx";
 import Long from "long";
 import _m0 from "protobufjs/minimal";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import { MsgDepositWithinBatch, MsgSwapWithinBatch, MsgWithdrawWithinBatch } from "./tx";
 
 export const protobufPackage = "cyber.liquidity.v1beta1";
 
@@ -251,8 +251,10 @@ export const PoolType = {
     const obj: any = {};
     message.id !== undefined && (obj.id = Math.round(message.id));
     message.name !== undefined && (obj.name = message.name);
-    message.minReserveCoinNum !== undefined && (obj.minReserveCoinNum = Math.round(message.minReserveCoinNum));
-    message.maxReserveCoinNum !== undefined && (obj.maxReserveCoinNum = Math.round(message.maxReserveCoinNum));
+    message.minReserveCoinNum !== undefined &&
+      (obj.minReserveCoinNum = Math.round(message.minReserveCoinNum));
+    message.maxReserveCoinNum !== undefined &&
+      (obj.maxReserveCoinNum = Math.round(message.maxReserveCoinNum));
     message.description !== undefined && (obj.description = message.description);
     return obj;
   },
@@ -365,9 +367,13 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      poolTypes: Array.isArray(object?.poolTypes) ? object.poolTypes.map((e: any) => PoolType.fromJSON(e)) : [],
+      poolTypes: Array.isArray(object?.poolTypes)
+        ? object.poolTypes.map((e: any) => PoolType.fromJSON(e))
+        : [],
       minInitDepositAmount: isSet(object.minInitDepositAmount) ? String(object.minInitDepositAmount) : "",
-      initPoolCoinMintAmount: isSet(object.initPoolCoinMintAmount) ? String(object.initPoolCoinMintAmount) : "",
+      initPoolCoinMintAmount: isSet(object.initPoolCoinMintAmount)
+        ? String(object.initPoolCoinMintAmount)
+        : "",
       maxReserveCoinAmount: isSet(object.maxReserveCoinAmount) ? String(object.maxReserveCoinAmount) : "",
       poolCreationFee: Array.isArray(object?.poolCreationFee)
         ? object.poolCreationFee.map((e: any) => Coin.fromJSON(e))
@@ -376,22 +382,25 @@ export const Params = {
       withdrawFeeRate: isSet(object.withdrawFeeRate) ? String(object.withdrawFeeRate) : "",
       maxOrderAmountRatio: isSet(object.maxOrderAmountRatio) ? String(object.maxOrderAmountRatio) : "",
       unitBatchHeight: isSet(object.unitBatchHeight) ? Number(object.unitBatchHeight) : 0,
-      circuitBreakerEnabled: isSet(object.circuitBreakerEnabled) ? Boolean(object.circuitBreakerEnabled) : false,
+      circuitBreakerEnabled: isSet(object.circuitBreakerEnabled)
+        ? Boolean(object.circuitBreakerEnabled)
+        : false,
     };
   },
 
   toJSON(message: Params): unknown {
     const obj: any = {};
     if (message.poolTypes) {
-      obj.poolTypes = message.poolTypes.map((e) => e ? PoolType.toJSON(e) : undefined);
+      obj.poolTypes = message.poolTypes.map((e) => (e ? PoolType.toJSON(e) : undefined));
     } else {
       obj.poolTypes = [];
     }
     message.minInitDepositAmount !== undefined && (obj.minInitDepositAmount = message.minInitDepositAmount);
-    message.initPoolCoinMintAmount !== undefined && (obj.initPoolCoinMintAmount = message.initPoolCoinMintAmount);
+    message.initPoolCoinMintAmount !== undefined &&
+      (obj.initPoolCoinMintAmount = message.initPoolCoinMintAmount);
     message.maxReserveCoinAmount !== undefined && (obj.maxReserveCoinAmount = message.maxReserveCoinAmount);
     if (message.poolCreationFee) {
-      obj.poolCreationFee = message.poolCreationFee.map((e) => e ? Coin.toJSON(e) : undefined);
+      obj.poolCreationFee = message.poolCreationFee.map((e) => (e ? Coin.toJSON(e) : undefined));
     } else {
       obj.poolCreationFee = [];
     }
@@ -399,7 +408,8 @@ export const Params = {
     message.withdrawFeeRate !== undefined && (obj.withdrawFeeRate = message.withdrawFeeRate);
     message.maxOrderAmountRatio !== undefined && (obj.maxOrderAmountRatio = message.maxOrderAmountRatio);
     message.unitBatchHeight !== undefined && (obj.unitBatchHeight = Math.round(message.unitBatchHeight));
-    message.circuitBreakerEnabled !== undefined && (obj.circuitBreakerEnabled = message.circuitBreakerEnabled);
+    message.circuitBreakerEnabled !== undefined &&
+      (obj.circuitBreakerEnabled = message.circuitBreakerEnabled);
     return obj;
   },
 
@@ -494,14 +504,15 @@ export const Pool = {
     } else {
       obj.reserveCoinDenoms = [];
     }
-    message.reserveAccountAddress !== undefined && (obj.reserveAccountAddress = message.reserveAccountAddress);
+    message.reserveAccountAddress !== undefined &&
+      (obj.reserveAccountAddress = message.reserveAccountAddress);
     message.poolCoinDenom !== undefined && (obj.poolCoinDenom = message.poolCoinDenom);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<Pool>, I>>(object: I): Pool {
     const message = createBasePool();
-    message.id = (object.id !== undefined && object.id !== null) ? Long.fromValue(object.id) : Long.UZERO;
+    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
     message.typeId = object.typeId ?? 0;
     message.reserveCoinDenoms = object.reserveCoinDenoms?.map((e) => e) || [];
     message.reserveAccountAddress = object.reserveAccountAddress ?? "";
@@ -555,8 +566,12 @@ export const PoolMetadata = {
   fromJSON(object: any): PoolMetadata {
     return {
       poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
-      poolCoinTotalSupply: isSet(object.poolCoinTotalSupply) ? Coin.fromJSON(object.poolCoinTotalSupply) : undefined,
-      reserveCoins: Array.isArray(object?.reserveCoins) ? object.reserveCoins.map((e: any) => Coin.fromJSON(e)) : [],
+      poolCoinTotalSupply: isSet(object.poolCoinTotalSupply)
+        ? Coin.fromJSON(object.poolCoinTotalSupply)
+        : undefined,
+      reserveCoins: Array.isArray(object?.reserveCoins)
+        ? object.reserveCoins.map((e: any) => Coin.fromJSON(e))
+        : [],
     };
   },
 
@@ -564,9 +579,11 @@ export const PoolMetadata = {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.poolCoinTotalSupply !== undefined &&
-      (obj.poolCoinTotalSupply = message.poolCoinTotalSupply ? Coin.toJSON(message.poolCoinTotalSupply) : undefined);
+      (obj.poolCoinTotalSupply = message.poolCoinTotalSupply
+        ? Coin.toJSON(message.poolCoinTotalSupply)
+        : undefined);
     if (message.reserveCoins) {
-      obj.reserveCoins = message.reserveCoins.map((e) => e ? Coin.toJSON(e) : undefined);
+      obj.reserveCoins = message.reserveCoins.map((e) => (e ? Coin.toJSON(e) : undefined));
     } else {
       obj.reserveCoins = [];
     }
@@ -575,12 +592,12 @@ export const PoolMetadata = {
 
   fromPartial<I extends Exact<DeepPartial<PoolMetadata>, I>>(object: I): PoolMetadata {
     const message = createBasePoolMetadata();
-    message.poolId = (object.poolId !== undefined && object.poolId !== null)
-      ? Long.fromValue(object.poolId)
-      : Long.UZERO;
-    message.poolCoinTotalSupply = (object.poolCoinTotalSupply !== undefined && object.poolCoinTotalSupply !== null)
-      ? Coin.fromPartial(object.poolCoinTotalSupply)
-      : undefined;
+    message.poolId =
+      object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.poolCoinTotalSupply =
+      object.poolCoinTotalSupply !== undefined && object.poolCoinTotalSupply !== null
+        ? Coin.fromPartial(object.poolCoinTotalSupply)
+        : undefined;
     message.reserveCoins = object.reserveCoins?.map((e) => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -677,32 +694,38 @@ export const PoolBatch = {
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.index !== undefined && (obj.index = (message.index || Long.UZERO).toString());
     message.beginHeight !== undefined && (obj.beginHeight = (message.beginHeight || Long.ZERO).toString());
-    message.depositMsgIndex !== undefined && (obj.depositMsgIndex = (message.depositMsgIndex || Long.UZERO).toString());
+    message.depositMsgIndex !== undefined &&
+      (obj.depositMsgIndex = (message.depositMsgIndex || Long.UZERO).toString());
     message.withdrawMsgIndex !== undefined &&
       (obj.withdrawMsgIndex = (message.withdrawMsgIndex || Long.UZERO).toString());
-    message.swapMsgIndex !== undefined && (obj.swapMsgIndex = (message.swapMsgIndex || Long.UZERO).toString());
+    message.swapMsgIndex !== undefined &&
+      (obj.swapMsgIndex = (message.swapMsgIndex || Long.UZERO).toString());
     message.executed !== undefined && (obj.executed = message.executed);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<PoolBatch>, I>>(object: I): PoolBatch {
     const message = createBasePoolBatch();
-    message.poolId = (object.poolId !== undefined && object.poolId !== null)
-      ? Long.fromValue(object.poolId)
-      : Long.UZERO;
-    message.index = (object.index !== undefined && object.index !== null) ? Long.fromValue(object.index) : Long.UZERO;
-    message.beginHeight = (object.beginHeight !== undefined && object.beginHeight !== null)
-      ? Long.fromValue(object.beginHeight)
-      : Long.ZERO;
-    message.depositMsgIndex = (object.depositMsgIndex !== undefined && object.depositMsgIndex !== null)
-      ? Long.fromValue(object.depositMsgIndex)
-      : Long.UZERO;
-    message.withdrawMsgIndex = (object.withdrawMsgIndex !== undefined && object.withdrawMsgIndex !== null)
-      ? Long.fromValue(object.withdrawMsgIndex)
-      : Long.UZERO;
-    message.swapMsgIndex = (object.swapMsgIndex !== undefined && object.swapMsgIndex !== null)
-      ? Long.fromValue(object.swapMsgIndex)
-      : Long.UZERO;
+    message.poolId =
+      object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.index =
+      object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.UZERO;
+    message.beginHeight =
+      object.beginHeight !== undefined && object.beginHeight !== null
+        ? Long.fromValue(object.beginHeight)
+        : Long.ZERO;
+    message.depositMsgIndex =
+      object.depositMsgIndex !== undefined && object.depositMsgIndex !== null
+        ? Long.fromValue(object.depositMsgIndex)
+        : Long.UZERO;
+    message.withdrawMsgIndex =
+      object.withdrawMsgIndex !== undefined && object.withdrawMsgIndex !== null
+        ? Long.fromValue(object.withdrawMsgIndex)
+        : Long.UZERO;
+    message.swapMsgIndex =
+      object.swapMsgIndex !== undefined && object.swapMsgIndex !== null
+        ? Long.fromValue(object.swapMsgIndex)
+        : Long.UZERO;
     message.executed = object.executed ?? false;
     return message;
   },
@@ -793,24 +816,28 @@ export const DepositMsgState = {
     message.executed !== undefined && (obj.executed = message.executed);
     message.succeeded !== undefined && (obj.succeeded = message.succeeded);
     message.toBeDeleted !== undefined && (obj.toBeDeleted = message.toBeDeleted);
-    message.msg !== undefined && (obj.msg = message.msg ? MsgDepositWithinBatch.toJSON(message.msg) : undefined);
+    message.msg !== undefined &&
+      (obj.msg = message.msg ? MsgDepositWithinBatch.toJSON(message.msg) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<DepositMsgState>, I>>(object: I): DepositMsgState {
     const message = createBaseDepositMsgState();
-    message.msgHeight = (object.msgHeight !== undefined && object.msgHeight !== null)
-      ? Long.fromValue(object.msgHeight)
-      : Long.ZERO;
-    message.msgIndex = (object.msgIndex !== undefined && object.msgIndex !== null)
-      ? Long.fromValue(object.msgIndex)
-      : Long.UZERO;
+    message.msgHeight =
+      object.msgHeight !== undefined && object.msgHeight !== null
+        ? Long.fromValue(object.msgHeight)
+        : Long.ZERO;
+    message.msgIndex =
+      object.msgIndex !== undefined && object.msgIndex !== null
+        ? Long.fromValue(object.msgIndex)
+        : Long.UZERO;
     message.executed = object.executed ?? false;
     message.succeeded = object.succeeded ?? false;
     message.toBeDeleted = object.toBeDeleted ?? false;
-    message.msg = (object.msg !== undefined && object.msg !== null)
-      ? MsgDepositWithinBatch.fromPartial(object.msg)
-      : undefined;
+    message.msg =
+      object.msg !== undefined && object.msg !== null
+        ? MsgDepositWithinBatch.fromPartial(object.msg)
+        : undefined;
     return message;
   },
 };
@@ -900,24 +927,28 @@ export const WithdrawMsgState = {
     message.executed !== undefined && (obj.executed = message.executed);
     message.succeeded !== undefined && (obj.succeeded = message.succeeded);
     message.toBeDeleted !== undefined && (obj.toBeDeleted = message.toBeDeleted);
-    message.msg !== undefined && (obj.msg = message.msg ? MsgWithdrawWithinBatch.toJSON(message.msg) : undefined);
+    message.msg !== undefined &&
+      (obj.msg = message.msg ? MsgWithdrawWithinBatch.toJSON(message.msg) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<WithdrawMsgState>, I>>(object: I): WithdrawMsgState {
     const message = createBaseWithdrawMsgState();
-    message.msgHeight = (object.msgHeight !== undefined && object.msgHeight !== null)
-      ? Long.fromValue(object.msgHeight)
-      : Long.ZERO;
-    message.msgIndex = (object.msgIndex !== undefined && object.msgIndex !== null)
-      ? Long.fromValue(object.msgIndex)
-      : Long.UZERO;
+    message.msgHeight =
+      object.msgHeight !== undefined && object.msgHeight !== null
+        ? Long.fromValue(object.msgHeight)
+        : Long.ZERO;
+    message.msgIndex =
+      object.msgIndex !== undefined && object.msgIndex !== null
+        ? Long.fromValue(object.msgIndex)
+        : Long.UZERO;
     message.executed = object.executed ?? false;
     message.succeeded = object.succeeded ?? false;
     message.toBeDeleted = object.toBeDeleted ?? false;
-    message.msg = (object.msg !== undefined && object.msg !== null)
-      ? MsgWithdrawWithinBatch.fromPartial(object.msg)
-      : undefined;
+    message.msg =
+      object.msg !== undefined && object.msg !== null
+        ? MsgWithdrawWithinBatch.fromPartial(object.msg)
+        : undefined;
     return message;
   },
 };
@@ -1024,10 +1055,18 @@ export const SwapMsgState = {
       executed: isSet(object.executed) ? Boolean(object.executed) : false,
       succeeded: isSet(object.succeeded) ? Boolean(object.succeeded) : false,
       toBeDeleted: isSet(object.toBeDeleted) ? Boolean(object.toBeDeleted) : false,
-      orderExpiryHeight: isSet(object.orderExpiryHeight) ? Long.fromValue(object.orderExpiryHeight) : Long.ZERO,
-      exchangedOfferCoin: isSet(object.exchangedOfferCoin) ? Coin.fromJSON(object.exchangedOfferCoin) : undefined,
-      remainingOfferCoin: isSet(object.remainingOfferCoin) ? Coin.fromJSON(object.remainingOfferCoin) : undefined,
-      reservedOfferCoinFee: isSet(object.reservedOfferCoinFee) ? Coin.fromJSON(object.reservedOfferCoinFee) : undefined,
+      orderExpiryHeight: isSet(object.orderExpiryHeight)
+        ? Long.fromValue(object.orderExpiryHeight)
+        : Long.ZERO,
+      exchangedOfferCoin: isSet(object.exchangedOfferCoin)
+        ? Coin.fromJSON(object.exchangedOfferCoin)
+        : undefined,
+      remainingOfferCoin: isSet(object.remainingOfferCoin)
+        ? Coin.fromJSON(object.remainingOfferCoin)
+        : undefined,
+      reservedOfferCoinFee: isSet(object.reservedOfferCoinFee)
+        ? Coin.fromJSON(object.reservedOfferCoinFee)
+        : undefined,
       msg: isSet(object.msg) ? MsgSwapWithinBatch.fromJSON(object.msg) : undefined,
     };
   },
@@ -1042,55 +1081,75 @@ export const SwapMsgState = {
     message.orderExpiryHeight !== undefined &&
       (obj.orderExpiryHeight = (message.orderExpiryHeight || Long.ZERO).toString());
     message.exchangedOfferCoin !== undefined &&
-      (obj.exchangedOfferCoin = message.exchangedOfferCoin ? Coin.toJSON(message.exchangedOfferCoin) : undefined);
+      (obj.exchangedOfferCoin = message.exchangedOfferCoin
+        ? Coin.toJSON(message.exchangedOfferCoin)
+        : undefined);
     message.remainingOfferCoin !== undefined &&
-      (obj.remainingOfferCoin = message.remainingOfferCoin ? Coin.toJSON(message.remainingOfferCoin) : undefined);
+      (obj.remainingOfferCoin = message.remainingOfferCoin
+        ? Coin.toJSON(message.remainingOfferCoin)
+        : undefined);
     message.reservedOfferCoinFee !== undefined &&
-      (obj.reservedOfferCoinFee = message.reservedOfferCoinFee ? Coin.toJSON(message.reservedOfferCoinFee) : undefined);
+      (obj.reservedOfferCoinFee = message.reservedOfferCoinFee
+        ? Coin.toJSON(message.reservedOfferCoinFee)
+        : undefined);
     message.msg !== undefined && (obj.msg = message.msg ? MsgSwapWithinBatch.toJSON(message.msg) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<SwapMsgState>, I>>(object: I): SwapMsgState {
     const message = createBaseSwapMsgState();
-    message.msgHeight = (object.msgHeight !== undefined && object.msgHeight !== null)
-      ? Long.fromValue(object.msgHeight)
-      : Long.ZERO;
-    message.msgIndex = (object.msgIndex !== undefined && object.msgIndex !== null)
-      ? Long.fromValue(object.msgIndex)
-      : Long.UZERO;
+    message.msgHeight =
+      object.msgHeight !== undefined && object.msgHeight !== null
+        ? Long.fromValue(object.msgHeight)
+        : Long.ZERO;
+    message.msgIndex =
+      object.msgIndex !== undefined && object.msgIndex !== null
+        ? Long.fromValue(object.msgIndex)
+        : Long.UZERO;
     message.executed = object.executed ?? false;
     message.succeeded = object.succeeded ?? false;
     message.toBeDeleted = object.toBeDeleted ?? false;
-    message.orderExpiryHeight = (object.orderExpiryHeight !== undefined && object.orderExpiryHeight !== null)
-      ? Long.fromValue(object.orderExpiryHeight)
-      : Long.ZERO;
-    message.exchangedOfferCoin = (object.exchangedOfferCoin !== undefined && object.exchangedOfferCoin !== null)
-      ? Coin.fromPartial(object.exchangedOfferCoin)
-      : undefined;
-    message.remainingOfferCoin = (object.remainingOfferCoin !== undefined && object.remainingOfferCoin !== null)
-      ? Coin.fromPartial(object.remainingOfferCoin)
-      : undefined;
-    message.reservedOfferCoinFee = (object.reservedOfferCoinFee !== undefined && object.reservedOfferCoinFee !== null)
-      ? Coin.fromPartial(object.reservedOfferCoinFee)
-      : undefined;
-    message.msg = (object.msg !== undefined && object.msg !== null)
-      ? MsgSwapWithinBatch.fromPartial(object.msg)
-      : undefined;
+    message.orderExpiryHeight =
+      object.orderExpiryHeight !== undefined && object.orderExpiryHeight !== null
+        ? Long.fromValue(object.orderExpiryHeight)
+        : Long.ZERO;
+    message.exchangedOfferCoin =
+      object.exchangedOfferCoin !== undefined && object.exchangedOfferCoin !== null
+        ? Coin.fromPartial(object.exchangedOfferCoin)
+        : undefined;
+    message.remainingOfferCoin =
+      object.remainingOfferCoin !== undefined && object.remainingOfferCoin !== null
+        ? Coin.fromPartial(object.remainingOfferCoin)
+        : undefined;
+    message.reservedOfferCoinFee =
+      object.reservedOfferCoinFee !== undefined && object.reservedOfferCoinFee !== null
+        ? Coin.fromPartial(object.reservedOfferCoinFee)
+        : undefined;
+    message.msg =
+      object.msg !== undefined && object.msg !== null
+        ? MsgSwapWithinBatch.fromPartial(object.msg)
+        : undefined;
     return message;
   },
 };
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Long
+  ? string | number | Long
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {

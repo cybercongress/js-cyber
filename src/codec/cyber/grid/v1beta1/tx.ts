@@ -1,8 +1,8 @@
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Params } from "./types";
+import Long from "long";
+import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "cyber.grid.v1beta1";
 
@@ -34,20 +34,15 @@ export interface MsgUpdateParams {
   params?: Params;
 }
 
-export interface MsgCreateRouteResponse {
-}
+export interface MsgCreateRouteResponse {}
 
-export interface MsgEditRouteResponse {
-}
+export interface MsgEditRouteResponse {}
 
-export interface MsgDeleteRouteResponse {
-}
+export interface MsgDeleteRouteResponse {}
 
-export interface MsgEditRouteNameResponse {
-}
+export interface MsgEditRouteNameResponse {}
 
-export interface MsgUpdateParamsResponse {
-}
+export interface MsgUpdateParamsResponse {}
 
 function createBaseMsgCreateRoute(): MsgCreateRoute {
   return { source: "", destination: "", name: "" };
@@ -178,7 +173,8 @@ export const MsgEditRoute = {
     const message = createBaseMsgEditRoute();
     message.source = object.source ?? "";
     message.destination = object.destination ?? "";
-    message.value = (object.value !== undefined && object.value !== null) ? Coin.fromPartial(object.value) : undefined;
+    message.value =
+      object.value !== undefined && object.value !== null ? Coin.fromPartial(object.value) : undefined;
     return message;
   },
 };
@@ -361,9 +357,8 @@ export const MsgUpdateParams = {
   fromPartial<I extends Exact<DeepPartial<MsgUpdateParams>, I>>(object: I): MsgUpdateParams {
     const message = createBaseMsgUpdateParams();
     message.authority = object.authority ?? "";
-    message.params = (object.params !== undefined && object.params !== null)
-      ? Params.fromPartial(object.params)
-      : undefined;
+    message.params =
+      object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
 };
@@ -573,9 +568,7 @@ export interface Msg {
 
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-  private readonly service: string;
-  constructor(rpc: Rpc, opts?: { service?: string }) {
-    this.service = opts?.service || "cyber.grid.v1beta1.Msg";
+  constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.CreateRoute = this.CreateRoute.bind(this);
     this.EditRoute = this.EditRoute.bind(this);
@@ -585,31 +578,31 @@ export class MsgClientImpl implements Msg {
   }
   CreateRoute(request: MsgCreateRoute): Promise<MsgCreateRouteResponse> {
     const data = MsgCreateRoute.encode(request).finish();
-    const promise = this.rpc.request(this.service, "CreateRoute", data);
+    const promise = this.rpc.request("cyber.grid.v1beta1.Msg", "CreateRoute", data);
     return promise.then((data) => MsgCreateRouteResponse.decode(new _m0.Reader(data)));
   }
 
   EditRoute(request: MsgEditRoute): Promise<MsgEditRouteResponse> {
     const data = MsgEditRoute.encode(request).finish();
-    const promise = this.rpc.request(this.service, "EditRoute", data);
+    const promise = this.rpc.request("cyber.grid.v1beta1.Msg", "EditRoute", data);
     return promise.then((data) => MsgEditRouteResponse.decode(new _m0.Reader(data)));
   }
 
   DeleteRoute(request: MsgDeleteRoute): Promise<MsgDeleteRouteResponse> {
     const data = MsgDeleteRoute.encode(request).finish();
-    const promise = this.rpc.request(this.service, "DeleteRoute", data);
+    const promise = this.rpc.request("cyber.grid.v1beta1.Msg", "DeleteRoute", data);
     return promise.then((data) => MsgDeleteRouteResponse.decode(new _m0.Reader(data)));
   }
 
   EditRouteName(request: MsgEditRouteName): Promise<MsgEditRouteNameResponse> {
     const data = MsgEditRouteName.encode(request).finish();
-    const promise = this.rpc.request(this.service, "EditRouteName", data);
+    const promise = this.rpc.request("cyber.grid.v1beta1.Msg", "EditRouteName", data);
     return promise.then((data) => MsgEditRouteNameResponse.decode(new _m0.Reader(data)));
   }
 
   UpdateParams(request: MsgUpdateParams): Promise<MsgUpdateParamsResponse> {
     const data = MsgUpdateParams.encode(request).finish();
-    const promise = this.rpc.request(this.service, "UpdateParams", data);
+    const promise = this.rpc.request("cyber.grid.v1beta1.Msg", "UpdateParams", data);
     return promise.then((data) => MsgUpdateParamsResponse.decode(new _m0.Reader(data)));
   }
 }
@@ -620,14 +613,21 @@ interface Rpc {
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Long
+  ? string | number | Long
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {

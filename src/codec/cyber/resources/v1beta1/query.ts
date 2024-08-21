@@ -1,13 +1,12 @@
 /* eslint-disable */
+import { Params } from "./types";
+import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import Long from "long";
 import _m0 from "protobufjs/minimal";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import { Params } from "./types";
 
 export const protobufPackage = "cyber.resources.v1beta1";
 
-export interface QueryParamsRequest {
-}
+export interface QueryParamsRequest {}
 
 export interface QueryParamsResponse {
   params?: Params;
@@ -93,7 +92,9 @@ export const QueryParamsResponse = {
   },
 
   fromJSON(object: any): QueryParamsResponse {
-    return { params: isSet(object.params) ? Params.fromJSON(object.params) : undefined };
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+    };
   },
 
   toJSON(message: QueryParamsResponse): unknown {
@@ -104,9 +105,8 @@ export const QueryParamsResponse = {
 
   fromPartial<I extends Exact<DeepPartial<QueryParamsResponse>, I>>(object: I): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = (object.params !== undefined && object.params !== null)
-      ? Params.fromPartial(object.params)
-      : undefined;
+    message.params =
+      object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
 };
@@ -171,13 +171,11 @@ export const QueryInvestmintRequest = {
 
   fromPartial<I extends Exact<DeepPartial<QueryInvestmintRequest>, I>>(object: I): QueryInvestmintRequest {
     const message = createBaseQueryInvestmintRequest();
-    message.amount = (object.amount !== undefined && object.amount !== null)
-      ? Coin.fromPartial(object.amount)
-      : undefined;
+    message.amount =
+      object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
     message.resource = object.resource ?? "";
-    message.length = (object.length !== undefined && object.length !== null)
-      ? Long.fromValue(object.length)
-      : Long.UZERO;
+    message.length =
+      object.length !== undefined && object.length !== null ? Long.fromValue(object.length) : Long.UZERO;
     return message;
   },
 };
@@ -213,7 +211,9 @@ export const QueryInvestmintResponse = {
   },
 
   fromJSON(object: any): QueryInvestmintResponse {
-    return { amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined };
+    return {
+      amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined,
+    };
   },
 
   toJSON(message: QueryInvestmintResponse): unknown {
@@ -224,9 +224,8 @@ export const QueryInvestmintResponse = {
 
   fromPartial<I extends Exact<DeepPartial<QueryInvestmintResponse>, I>>(object: I): QueryInvestmintResponse {
     const message = createBaseQueryInvestmintResponse();
-    message.amount = (object.amount !== undefined && object.amount !== null)
-      ? Coin.fromPartial(object.amount)
-      : undefined;
+    message.amount =
+      object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
     return message;
   },
 };
@@ -238,22 +237,20 @@ export interface Query {
 
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-  private readonly service: string;
-  constructor(rpc: Rpc, opts?: { service?: string }) {
-    this.service = opts?.service || "cyber.resources.v1beta1.Query";
+  constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.Params = this.Params.bind(this);
     this.Investmint = this.Investmint.bind(this);
   }
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "Params", data);
+    const promise = this.rpc.request("cyber.resources.v1beta1.Query", "Params", data);
     return promise.then((data) => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
 
   Investmint(request: QueryInvestmintRequest): Promise<QueryInvestmintResponse> {
     const data = QueryInvestmintRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "Investmint", data);
+    const promise = this.rpc.request("cyber.resources.v1beta1.Query", "Investmint", data);
     return promise.then((data) => QueryInvestmintResponse.decode(new _m0.Reader(data)));
   }
 }
@@ -264,14 +261,21 @@ interface Rpc {
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Long
+  ? string | number | Long
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {
