@@ -37,8 +37,8 @@ import {
 } from "@cosmjs/stargate";
 import {
   BlockResultsResponse,
-  Tendermint34Client,
-  TendermintClient,
+  CometClient,
+  connectComet,
   toRfc3339WithNanoseconds,
 } from "@cosmjs/tendermint-rpc";
 import { assert } from "@cosmjs/utils";
@@ -152,7 +152,7 @@ type QueryClientType = QueryClient &
   IbcExtension;
 
 export interface PrivateCyberClient {
-  readonly tmClient: TendermintClient | undefined;
+  readonly cometClient: CometClient | undefined;
   readonly queryClient: QueryClientType | undefined;
 }
 
@@ -162,21 +162,21 @@ export declare type BondStatusString = Exclude<
 >;
 
 export class CyberClient {
-  private readonly tmClient: TendermintClient | undefined;
+  private readonly cometClient: CometClient | undefined;
   private readonly queryClient: QueryClientType | undefined;
   private readonly codesCache = new Map<number, CodeDetails>();
   private chainId: string | undefined;
 
   public static async connect(endpoint: string): Promise<CyberClient> {
-    const tmClient = await Tendermint34Client.connect(endpoint);
-    return new CyberClient(tmClient);
+    const cometClient = await connectComet(endpoint);
+    return new CyberClient(cometClient);
   }
 
-  protected constructor(tmClient: Tendermint34Client | undefined) {
-    if (tmClient) {
-      this.tmClient = tmClient;
+  protected constructor(cometClient: CometClient | undefined) {
+    if (cometClient) {
+      this.cometClient = cometClient;
       this.queryClient = QueryClient.withExtensions(
-        tmClient,
+        cometClient,
         setupAuthExtension,
         setupBankExtension,
         setupDistributionExtension,
@@ -195,17 +195,17 @@ export class CyberClient {
     }
   }
 
-  protected getTmClient(): TendermintClient | undefined {
-    return this.tmClient;
+  protected getCometClient(): CometClient | undefined {
+    return this.cometClient;
   }
 
-  protected forceGetTmClient(): TendermintClient {
-    if (!this.tmClient) {
+  protected forceGetCometClient(): CometClient {
+    if (!this.cometClient) {
       throw new Error(
         "Tendermint client not available. You cannot use online functionality in offline mode.",
       );
     }
-    return this.tmClient;
+    return this.cometClient;
   }
 
   protected getQueryClient(): QueryClientType | undefined {
@@ -235,7 +235,7 @@ export class CyberClient {
 
   public async getChainId(): Promise<string> {
     if (!this.chainId) {
-      const response = await this.forceGetTmClient().status();
+      const response = await this.forceGetCometClient().status();
       const chainId = response.nodeInfo.network;
       if (!chainId) throw new Error("Chain ID must not be empty");
       this.chainId = chainId;
@@ -245,7 +245,7 @@ export class CyberClient {
   }
 
   public async getHeight(): Promise<number> {
-    const status = await this.forceGetTmClient().status();
+    const status = await this.forceGetCometClient().status();
     return status.syncInfo.latestBlockHeight;
   }
 
@@ -275,7 +275,7 @@ export class CyberClient {
   }
 
   public async getBlock(height?: number): Promise<Block> {
-    const response = await this.forceGetTmClient().block(height);
+    const response = await this.forceGetCometClient().block(height);
     return {
       id: toHex(response.blockId.hash).toUpperCase(),
       header: {
@@ -292,7 +292,7 @@ export class CyberClient {
   }
 
   public async getBlockResults(height?: number): Promise<BlockResultsResponse> {
-    return this.forceGetTmClient().blockResults(height);
+    return this.forceGetCometClient().blockResults(height);
   }
 
   public async getBalance(address: string, searchDenom: string): Promise<Coin> {
@@ -355,11 +355,11 @@ export class CyberClient {
   }
 
   public disconnect(): void {
-    if (this.tmClient) this.tmClient.disconnect();
+    if (this.cometClient) this.cometClient.disconnect();
   }
 
   public async broadcastTx(tx: Uint8Array): Promise<DeliverTxResponse> {
-    const broadcasted = await this.forceGetTmClient().broadcastTxSync({ tx });
+    const broadcasted = await this.forceGetCometClient().broadcastTxSync({ tx });
     const transactionId = toHex(broadcasted.hash).toUpperCase();
 
     return {
@@ -904,7 +904,7 @@ export class CyberClient {
   }
 
   private async txsQuery(query: string): Promise<readonly IndexedTx[]> {
-    const results = await this.forceGetTmClient().txSearchAll({ query: query });
+    const results = await this.forceGetCometClient().txSearchAll({ query: query });
     return results.txs.map((tx) => {
       return {
         height: tx.height,

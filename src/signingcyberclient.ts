@@ -55,7 +55,7 @@ import {
   StdFee,
 } from "@cosmjs/stargate";
 import { longify } from "@cosmjs/stargate/build/queryclient";
-import { Tendermint34Client } from "@cosmjs/tendermint-rpc";
+import { CometClient, connectComet, HttpEndpoint } from "@cosmjs/tendermint-rpc";
 import { arrayContentEquals, assert, assertDefined } from "@cosmjs/utils";
 import { Grant } from "cosmjs-types/cosmos/authz/v1beta1/authz";
 import { MsgExec, MsgGrant, MsgRevoke } from "cosmjs-types/cosmos/authz/v1beta1/tx";
@@ -232,11 +232,11 @@ export class SigningCyberClient extends CyberClient {
   private readonly aminoTypes: AminoTypes;
 
   public static async connectWithSigner(
-    endpoint: string,
+    endpoint: string | HttpEndpoint,
     signer: OfflineSigner,
     options: SigningCyberClientOptions = {},
   ): Promise<SigningCyberClient> {
-    const tmClient = await Tendermint34Client.connect(endpoint);
+    const tmClient = await connectComet(endpoint);
     return new SigningCyberClient(tmClient, signer, options);
   }
 
@@ -285,7 +285,7 @@ export class SigningCyberClient extends CyberClient {
   }
 
   protected constructor(
-    tmClient: Tendermint34Client | undefined,
+    tmClient: CometClient | undefined,
     signer: OfflineSigner,
     options: SigningCyberClientOptions,
   ) {
@@ -967,7 +967,6 @@ export class SigningCyberClient extends CyberClient {
     let usedFee: StdFee;
     if (fee == "auto" || typeof fee === "number") {
       const gasEstimation = await this.simulate(signerAddress, messages, memo);
-      console.log('gasEstimation', gasEstimation)
       // Starting with Cosmos SDK 0.47, we see many cases in which 1.3 is not enough anymore
       // E.g. https://github.com/cosmos/cosmos-sdk/issues/16020
       const multiplier = typeof fee === "number" ? fee : 1.4;
@@ -978,8 +977,6 @@ export class SigningCyberClient extends CyberClient {
     } else {
       usedFee = fee;
     }
-
-    console.log('usedFee', usedFee)
 
     const txRaw = await this.sign(signerAddress, messages, usedFee, memo);
     const txBytes = TxRaw.encode(txRaw).finish();
