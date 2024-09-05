@@ -288,7 +288,7 @@ export function createCyberAminoConverters(): AminoConverters {
         name: name,
       }),
     },
-    "/tendermint.liquidity.v1beta1.MsgCreatePool": {
+    "/cyber.liquidity.v1beta1.MsgCreatePool": {
       aminoType: "liquidity/MsgCreatePool",
       toAmino: ({
         poolCreatorAddress,
@@ -309,7 +309,7 @@ export function createCyberAminoConverters(): AminoConverters {
         depositCoins: [...deposit_coins],
       }),
     },
-    "/tendermint.liquidity.v1beta1.MsgSwapWithinBatch": {
+    "/cyber.liquidity.v1beta1.MsgSwapWithinBatch": {
       aminoType: "liquidity/MsgSwapWithinBatch",
       toAmino: ({
         swapRequesterAddress,
@@ -355,7 +355,7 @@ export function createCyberAminoConverters(): AminoConverters {
         };
       },
     },
-    "/tendermint.liquidity.v1beta1.MsgDepositWithinBatch": {
+    "/cyber.liquidity.v1beta1.MsgDepositWithinBatch": {
       aminoType: "liquidity/MsgDepositWithinBatch",
       toAmino: ({
         depositorAddress,
@@ -376,7 +376,7 @@ export function createCyberAminoConverters(): AminoConverters {
         depositCoins: [...deposit_coins],
       }),
     },
-    "/tendermint.liquidity.v1beta1.MsgWithdrawWithinBatch": {
+    "/cyber.liquidity.v1beta1.MsgWithdrawWithinBatch": {
       aminoType: "liquidity/MsgWithdrawWithinBatch",
       toAmino: ({
         withdrawerAddress,

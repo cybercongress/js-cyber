@@ -112,7 +112,7 @@ export const renderItems: RenderItems = [
     },
   },
   {
-    typeUrl: "/tendermint.liquidity.v1beta1.MsgCreatePool",
+    typeUrl: "/cyber.liquidity.v1beta1.MsgCreatePool",
     value: MsgCreatePool,
     data: {
       poolCreatorAddress: testAddress,
@@ -121,7 +121,7 @@ export const renderItems: RenderItems = [
     },
   },
   {
-    typeUrl: "/tendermint.liquidity.v1beta1.MsgWithdrawWithinBatch",
+    typeUrl: "/cyber.liquidity.v1beta1.MsgWithdrawWithinBatch",
     value: MsgWithdrawWithinBatch,
     data: {
       withdrawerAddress: testAddress,
@@ -133,7 +133,7 @@ export const renderItems: RenderItems = [
     },
   },
   {
-    typeUrl: "/tendermint.liquidity.v1beta1.MsgDepositWithinBatch",
+    typeUrl: "/cyber.liquidity.v1beta1.MsgDepositWithinBatch",
     value: MsgDepositWithinBatch,
     data: {
       depositorAddress: testAddress,
@@ -142,7 +142,7 @@ export const renderItems: RenderItems = [
     },
   },
   {
-    typeUrl: "/tendermint.liquidity.v1beta1.MsgSwapWithinBatch",
+    typeUrl: "/cyber.liquidity.v1beta1.MsgSwapWithinBatch",
     value: MsgSwapWithinBatch,
     data: {
       swapRequesterAddress: testAddress,

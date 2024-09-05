@@ -23,16 +23,16 @@ export enum CosmwasmRegistryTypes {
   MsgStoreCode = "/cosmwasm.wasm.v1.MsgStoreCode",
 }
 
-export enum TendermintRegistryTypes {
-  MsgSwapWithinBatch = "/tendermint.liquidity.v1beta1.MsgSwapWithinBatch",
-  MsgDepositWithinBatch = "/tendermint.liquidity.v1beta1.MsgDepositWithinBatch",
-  MsgWithdrawWithinBatch = "/tendermint.liquidity.v1beta1.MsgWithdrawWithinBatch",
-  MsgCreatePool = "/tendermint.liquidity.v1beta1.MsgCreatePool",
+export enum LiquidityRegistryTypes {
+  MsgSwapWithinBatch = "/cyber.liquidity.v1beta1.MsgSwapWithinBatch",
+  MsgDepositWithinBatch = "/cyber.liquidity.v1beta1.MsgDepositWithinBatch",
+  MsgWithdrawWithinBatch = "/cyber.liquidity.v1beta1.MsgWithdrawWithinBatch",
+  MsgCreatePool = "/cyber.liquidity.v1beta1.MsgCreatePool",
 }
 
 export const RegistryTypes = {
   cyber: CyberRegistryTypes,
   cosmos: CosmosRegistryTypes,
   cosmwasm: CosmwasmRegistryTypes,
-  tendermint: TendermintRegistryTypes,
+  liquidity: LiquidityRegistryTypes,
 };

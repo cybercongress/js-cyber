@@ -108,7 +108,7 @@ export function isMsgInvestmintEncodeObject(
 // Liquidity module
 
 export interface MsgSwapWithinBatchEncodeObject extends EncodeObject {
-  readonly typeUrl: "/tendermint.liquidity.v1beta1.MsgSwapWithinBatch";
+  readonly typeUrl: "/cyber.liquidity.v1beta1.MsgSwapWithinBatch";
   readonly value: Partial<MsgSwapWithinBatch>;
 }
 
@@ -117,12 +117,12 @@ export function isMsgSwapWithinBatchEncodeObject(
 ): encodeObject is MsgSwapWithinBatchEncodeObject {
   return (
     (encodeObject as MsgSwapWithinBatchEncodeObject).typeUrl ===
-    "/tendermint.liquidity.v1beta1.MsgSwapWithinBatch"
+    "/cyber.liquidity.v1beta1.MsgSwapWithinBatch"
   );
 }
 
 export interface MsgDepositWithinBatchEncodeObject extends EncodeObject {
-  readonly typeUrl: "/tendermint.liquidity.v1beta1.MsgDepositWithinBatch";
+  readonly typeUrl: "/cyber.liquidity.v1beta1.MsgDepositWithinBatch";
   readonly value: Partial<MsgDepositWithinBatch>;
 }
 
@@ -131,12 +131,12 @@ export function isMsgDepositWithinBatchEncodeObject(
 ): encodeObject is MsgDepositWithinBatchEncodeObject {
   return (
     (encodeObject as MsgDepositWithinBatchEncodeObject).typeUrl ===
-    "/tendermint.liquidity.v1beta1.MsgDepositWithinBatch"
+    "/cyber.liquidity.v1beta1.MsgDepositWithinBatch"
   );
 }
 
 export interface MsgWithdrawWithinBatchEncodeObject extends EncodeObject {
-  readonly typeUrl: "/tendermint.liquidity.v1beta1.MsgWithdrawWithinBatch";
+  readonly typeUrl: "/cyber.liquidity.v1beta1.MsgWithdrawWithinBatch";
   readonly value: Partial<MsgWithdrawWithinBatch>;
 }
 
@@ -145,12 +145,12 @@ export function isMsgWithdrawWithinBatchEncodeObject(
 ): encodeObject is MsgWithdrawWithinBatchEncodeObject {
   return (
     (encodeObject as MsgWithdrawWithinBatchEncodeObject).typeUrl ===
-    "/tendermint.liquidity.v1beta1.MsgWithdrawWithinBatch"
+    "/cyber.liquidity.v1beta1.MsgWithdrawWithinBatch"
   );
 }
 
 export interface MsgCreatePoolEncodeObject extends EncodeObject {
-  readonly typeUrl: "/tendermint.liquidity.v1beta1.MsgCreatePool";
+  readonly typeUrl: "/cyber.liquidity.v1beta1.MsgCreatePool";
   readonly value: Partial<MsgCreatePool>;
 }
 
@@ -158,7 +158,7 @@ export function isMsgCreatePoolEncodeObject(
   encodeObject: EncodeObject,
 ): encodeObject is MsgCreatePoolEncodeObject {
   return (
-    (encodeObject as MsgCreatePoolEncodeObject).typeUrl === "/tendermint.liquidity.v1beta1.MsgCreatePool"
+    (encodeObject as MsgCreatePoolEncodeObject).typeUrl === "/cyber.liquidity.v1beta1.MsgCreatePool"
   );
 }
 

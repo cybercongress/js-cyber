@@ -120,7 +120,7 @@ import {
   CosmosRegistryTypes,
   CosmwasmRegistryTypes,
   CyberRegistryTypes,
-  TendermintRegistryTypes,
+  LiquidityRegistryTypes,
 } from "./registryTypes";
 import { renderItems } from "./renderItems";
 import { Link } from "./types";
@@ -193,10 +193,10 @@ export const cyberRegistryTypes: ReadonlyArray<[string, GeneratedType]> = [
   [CosmwasmRegistryTypes.MsgInstantiateContract, MsgInstantiateContract],
   [CosmwasmRegistryTypes.MsgStoreCode, MsgStoreCode],
 
-  [TendermintRegistryTypes.MsgSwapWithinBatch, MsgSwapWithinBatch],
-  [TendermintRegistryTypes.MsgDepositWithinBatch, MsgDepositWithinBatch],
-  [TendermintRegistryTypes.MsgWithdrawWithinBatch, MsgWithdrawWithinBatch],
-  [TendermintRegistryTypes.MsgCreatePool, MsgCreatePool],
+  [LiquidityRegistryTypes.MsgSwapWithinBatch, MsgSwapWithinBatch],
+  [LiquidityRegistryTypes.MsgDepositWithinBatch, MsgDepositWithinBatch],
+  [LiquidityRegistryTypes.MsgWithdrawWithinBatch, MsgWithdrawWithinBatch],
+  [LiquidityRegistryTypes.MsgCreatePool, MsgCreatePool],
 ];
 
 function createDefaultRegistry(): Registry {
@@ -825,7 +825,7 @@ export class SigningCyberClient extends CyberClient {
     memo = "",
   ): Promise<DeliverTxResponse | string[]> {
     const swapWithinBatchMsg: MsgSwapWithinBatchEncodeObject = {
-      typeUrl: "/tendermint.liquidity.v1beta1.MsgSwapWithinBatch",
+      typeUrl: "/cyber.liquidity.v1beta1.MsgSwapWithinBatch",
       value: MsgSwapWithinBatch.fromPartial({
         swapRequesterAddress: swapRequesterAddress,
         poolId: poolId,
@@ -847,7 +847,7 @@ export class SigningCyberClient extends CyberClient {
     memo = "",
   ): Promise<DeliverTxResponse | string[]> {
     const depositWithinBatchMsg: MsgDepositWithinBatchEncodeObject = {
-      typeUrl: "/tendermint.liquidity.v1beta1.MsgDepositWithinBatch",
+      typeUrl: "/cyber.liquidity.v1beta1.MsgDepositWithinBatch",
       value: MsgDepositWithinBatch.fromPartial({
         depositorAddress: depositorAddress,
         poolId: poolId,
@@ -865,7 +865,7 @@ export class SigningCyberClient extends CyberClient {
     memo = "",
   ): Promise<DeliverTxResponse | string[]> {
     const withdrawWithinBatchMsg: MsgWithdrawWithinBatchEncodeObject = {
-      typeUrl: "/tendermint.liquidity.v1beta1.MsgWithdrawWithinBatch",
+      typeUrl: "/cyber.liquidity.v1beta1.MsgWithdrawWithinBatch",
       value: MsgWithdrawWithinBatch.fromPartial({
         withdrawerAddress: withdrawerAddress,
         poolId: poolId,
@@ -883,7 +883,7 @@ export class SigningCyberClient extends CyberClient {
     memo = "",
   ): Promise<DeliverTxResponse | string[]> {
     const createPoolMsg: MsgCreatePoolEncodeObject = {
-      typeUrl: "/tendermint.liquidity.v1beta1.MsgCreatePool",
+      typeUrl: "/cyber.liquidity.v1beta1.MsgCreatePool",
       value: MsgCreatePool.fromPartial({
         poolCreatorAddress: poolCreatorAddress,
         poolTypeId: poolTypeId,
